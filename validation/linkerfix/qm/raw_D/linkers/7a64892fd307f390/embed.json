@@ -1,9 +1,0 @@
-{
-  "embed_method": "ETKDGv3",
-  "n_confs": 16,
-  "chosen_conf": 14,
-  "force_field": "MMFF",
-  "ff_energy": 128.56012973926312,
-  "embed_seed": 12648430,
-  "natoms": 28
-}

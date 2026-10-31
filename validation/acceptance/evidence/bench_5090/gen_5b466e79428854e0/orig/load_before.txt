@@ -1,2 +1,0 @@
- 09:07:17 up 1 day, 23:49,  1 user,  load average: 16.44, 10.57, 6.37
-0, NVIDIA GeForce RTX 5090, 13 %, 16255 MiB
