@@ -1,21 +1,27 @@
-# MOFSynth Fast 3.1.1
+# MOF Synthesizability
 
-GitHub distribution of the supplied 3.1.1 lightweight package, including the
-2026-10-25 stereo-compatible RMSD selection revision. This package reuses an
-existing portable runtime. **It does not include UMA weights, Python environments,
-or a standalone runtime installer.** Original scientific code and historical
-validation evidence are preserved.
+Run MOFSynth Fast 3.1.1 on CIF files to calculate five descriptors and a synthesizability score.
 
-## Requirements and installation
+## Requirements
 
-Linux x86_64, Python >=3.10, bash, tar, timeout, sed, grep, glibc >=2.34,
-GLIBCXX >=3.4.29, and unprivileged user namespaces for bubblewrap are required.
-The existing runtime must supply MOFid, xTB, Java, MOFSimplify, the frozen VPU
-model and preprocessing, the QMOF reference hull, and a compatible torch/fairchem
-interpreter. Do not substitute an arbitrary environment or a newly trained model.
+- Linux x86_64 with Python 3.10 or later.
+- An existing MOFSynth portable runtime containing MOFid, xTB, Java, MOFSimplify, the prediction model and QMOF reference hull.
+- A compatible Python environment with PyTorch, fairchem and ASE for Ehull calculations.
+- For GPU execution, an NVIDIA GPU with a compatible driver.
+- glibc >=2.34, GLIBCXX >=3.4.29, bash, tar, timeout, sed and grep. The system must allow unprivileged user namespaces for bubblewrap.
 
-After obtaining that runtime and accepting the access conditions at
-https://huggingface.co/facebook/UMA, install UMA with your own authorized account:
+This repository uses an existing runtime; it does not install those environments from scratch.
+
+## 1. Download the code
+
+```bash
+git clone https://github.com/xijun-group/MOF-Synthesizability.git
+cd MOF-Synthesizability
+```
+
+## 2. Set up UMA
+
+Request access to [facebook/UMA](https://huggingface.co/facebook/UMA) using your Hugging Face account. Once access is granted:
 
 ```bash
 python3 -m pip install huggingface_hub
@@ -23,66 +29,80 @@ hf auth login
 python3 install/setup_uma.py --prefix /absolute/path/runtime
 ```
 
-Alternatively use an already authorized local copy (no network needed):
+If you already have `uma-s-1p1.pt`, use the local file instead:
 
 ```bash
 python3 install/setup_uma.py --prefix /absolute/path/runtime \
     --checkpoint /absolute/path/uma-s-1p1.pt
 ```
 
-The helper verifies the frozen checkpoint size and SHA-256, using the upstream
-revision recorded in `specs/uma.json`. It does not accept upstream conditions
-on your behalf. Keep authentication caches and tokens outside this repository.
-The setup helper writes only the checkpoint location in the selected runtime;
-the runtime-reuse installer below does not modify the runtime itself.
+## 3. Configure the runtime
+
+Replace the paths below with your existing runtime directory and Ehull Python interpreter:
 
 ```bash
-bash install.sh --plan --prefix /absolute/path/runtime \
-    --ehull-python /absolute/path/gpu-env/bin/python
 bash install.sh --prefix /absolute/path/runtime \
     --ehull-python /absolute/path/gpu-env/bin/python
+```
+
+Check the configuration:
+
+```bash
 bash predict.sh --plan
 python3 verify.py --quick
+```
+
+The configuration is saved locally, so you only need to do this once per installation.
+
+## 4. Predict a single MOF
+
+Run the included example:
+
+```bash
 bash predict.sh --cif examples/reference58.cif --label demo --gpu-id 0
 ```
 
-Runtime reuse is the default in this public distribution; `--reuse` remains accepted.
-An incomplete runtime is reported as an error. `verify.py --quick` checks paths and
-interpreter imports; it does not establish successful GPU inference. Run
-`python3 verify.py --gpu-id 0` to execute a fresh reference calculation.
-Use fresh work/output directories when changing protocols or input structures.
-
-## Scientific protocol
-
-Default Ehull convergence requires all four conditions for five consecutive distinct
-optimizer steps: atomic force <0.01 eV/A, maximum absolute principal Cauchy stress
-<0.05 GPa at zero pressure, FrechetCellFilter generalized force <0.03, and E/N
-range <=1e-5 eV/atom over six configurations spanning five updates. The step cap
-is 10000; reaching it is not convergence. Old force-only caches are rejected.
-`--baseline` is explicitly historical. Restart/perturbation diagnostics are not
-mandatory branches and no minimum-over-repeats selection is introduced.
-
-The parent-normalization and RMSD selection revisions in this ZIP remain unchanged.
-Scores are uncalibrated operational scores, not synthesis probabilities; no default
-0.5 cutoff is prescribed. Packaging does not retrain or recalibrate the model.
-See `EHULL_COMBINED_3_1_1.txt`, `RMSD_SA_STEREO_V4.txt`, and `README.txt` for details.
-The latter retains historical offline-package instructions, which do not apply to
-this lightweight GitHub distribution. Historical validation is not a new run.
-
-## Publishing
-
-Upload this directory as the repository. Its existing native Linux binaries and
-source archive are small enough for ordinary Git; retain `LICENSES/`, `sources/`
-and the OpenBabel patch/source. UMA must not be added to commits or Release archives.
-No new blanket license has been assigned to project-owned code. Existing third-party
-notices apply; see `THIRD_PARTY_NOTICES.md`.
-
-Rebuild the public archive outside the checkout:
+Run your own CIF and choose an output directory:
 
 ```bash
-python3 package_public.py --output /outside/checkout/mofsynth-fast-3.1.1-github.zip
-sha256sum -c MANIFEST.sha256 --quiet
+bash predict.sh --cif /absolute/path/my_mof.cif \
+    --label my_mof --work /absolute/path/results/my_mof --gpu-id 0
 ```
 
-The packager excludes runtime configuration, environments, caches and external
-weights even after local use. `PUBLIC_RELEASE.json` records source provenance.
+Without `--work`, results are written to `runs/<label>/prediction.json`.
+The output includes solvent-removal stability, RMSD, organic-fragment HOMO, sascore, Ehull and the final score.
+
+To run a complete installation check on the reference structure:
+
+```bash
+python3 verify.py --gpu-id 0
+```
+
+## 5. Predict multiple MOFs
+
+```bash
+python3 predict_batch.py --cifs /path/a.cif /path/b.cif \
+    --out /absolute/path/batch-results --slots 2 --cpus-per-slot 6 --gpus 0
+```
+
+For a larger set, create `cifs.txt` with one absolute CIF path per line:
+
+```bash
+python3 predict_batch.py --cif-list cifs.txt \
+    --out /absolute/path/batch-results --slots 4 --cpus-per-slot 6 --gpus 0,1
+```
+
+- `--slots`: number of concurrent MOF jobs.
+- `--cpus-per-slot`: CPU cores assigned to each job; slots × cores must fit the available CPUs.
+- `--gpus`: comma-separated GPU indices.
+- CIF filenames must be unique within a batch.
+
+Results are saved as `<output>/<label>/prediction.json`; the batch summary is `<output>/summary.csv`.
+Use a fresh output directory when changing input structures or calculation settings.
+
+## Command help
+
+```bash
+bash predict.sh --help
+python3 predict_batch.py --help
+```
