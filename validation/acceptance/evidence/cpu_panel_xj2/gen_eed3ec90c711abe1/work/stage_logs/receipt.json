@@ -1,0 +1,31 @@
+{
+  "state": "complete",
+  "stage_jobs": 3,
+  "wall_s": 10.629321965039708,
+  "stages": {
+    "rmsd": {
+      "state": "complete",
+      "stage": "rmsd",
+      "wall_s": 6.3433748269453645,
+      "returncode": 0,
+      "process_wall_s": 6.559929511044174,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/gen_eed3ec90c711abe1/work/stage_logs/rmsd.log"
+    },
+    "channel_b": {
+      "state": "complete",
+      "stage": "channel_b",
+      "wall_s": 3.8898751919623464,
+      "returncode": 0,
+      "process_wall_s": 4.0781519919401035,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/gen_eed3ec90c711abe1/work/stage_logs/channel_b.log"
+    },
+    "mofsimplify": {
+      "state": "complete",
+      "stage": "mofsimplify",
+      "wall_s": 10.467284968006425,
+      "returncode": 0,
+      "process_wall_s": 10.623815046972595,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/gen_eed3ec90c711abe1/work/stage_logs/mofsimplify.log"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/rmsd/supercell2.cif

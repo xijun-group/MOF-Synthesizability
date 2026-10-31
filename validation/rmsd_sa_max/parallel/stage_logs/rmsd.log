@@ -1,0 +1,5 @@
+[predict] MOFid: reusing /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/mofid/Output
+[predict] RMSD: 2x supercell, 142 -> 1136 sites
+[predict] MOFid fragments: reusing /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/mofid_supercell2/mofid/Output_original
+[predict] obabel -xc: /share/data/cheyue/data/SYN-final/release/mofsynth-fast-3.1/runtime/mofsynth-env/bin/obabel /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/rmsd/linker.xyz -xc -O /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/rmsd/linker.smi
+[predict] RMSD: 0.0234766497 A (plain, 3 methods, 24 atoms)

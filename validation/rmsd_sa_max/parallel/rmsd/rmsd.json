@@ -1,0 +1,55 @@
+{
+  "rmsd_a": 0.0234766497387001,
+  "rmsd_method": "plain",
+  "rmsd_n_methods": 3,
+  "all_method_values": {
+    "plain": 0.0234766497387001,
+    "hungarian": 0.0234766497387001,
+    "distance": 3.96316413244211
+  },
+  "natoms": 24,
+  "smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+  "sp0_energy_hartree": -39.915685244015,
+  "opt_energy_hartree": -39.91919860019,
+  "sp1_energy_hartree": -39.919198599492,
+  "delta_energy_hartree": -0.0035133561749987052,
+  "delta_energy_kcal_mol": -2.2046661333734376,
+  "target_selection": {
+    "protocol": "rmsd-deltae-sa-max-parent-v2-20261024",
+    "target_parent": "c1cc2cncc3ccc4cncc1c4c23",
+    "target_sa": 2.2235212228095467,
+    "sa_tied_parents": [
+      "c1cc2cncc3ccc4cncc1c4c23"
+    ],
+    "sa_tie_rule": "exact maximum; lexicographic canonical SMILES",
+    "geometry_copy_rule": "most explicit atoms among exact-parent matches; first component on tie",
+    "standardizer": {
+      "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+      "rdkit_version": "2026.03.6",
+      "tautomer_max_tautomers": 1000,
+      "tautomer_max_transforms": 1000,
+      "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+      "remaining_radicals": "legacy one-H-per-radical-electron capping",
+      "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+    }
+  },
+  "input_cif_sha256": "7e47bf7361f3431b7f9b104940e44fd79dc11de1ed790a1a7f50d6952d344ff0",
+  "supercell": 2,
+  "selected_xyz_sha256": "a2c006542f45bfc3f38418a79575ff8f3cf9ed6832172e0cb4bc42ad5634a116",
+  "geometry_selection": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/rmsd/geometry_selection.json",
+  "selected_geometry_component": {
+    "component_index": 0,
+    "natoms": 24,
+    "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+    "raw_geometry_formula": "C14H8N2",
+    "raw_geometry_formal_charge": 0,
+    "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+    "status": "ok",
+    "reason": "",
+    "repairs_for_identity_only": []
+  },
+  "method_tag": "GFN2-default-charge-spin",
+  "decomposition": "2x supercell (the upstream MOFSynth rule)",
+  "linkers_cif": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/mofid_supercell2/mofid/Output_original/MetalOxo/linkers.cif",
+  "linkers_cif_sha256": "73cc8a34d0d4ce9cdb9b3165f5ce050853ccd0094b66bb53ce5b7966890666c7"
+}

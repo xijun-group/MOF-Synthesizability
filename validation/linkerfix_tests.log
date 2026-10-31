@@ -1,0 +1,17 @@
+test_atom_order_and_kekule_invariance (__main__.LinkerTests.test_atom_order_and_kekule_invariance) ... ok
+test_charge_and_isotope_preservation (__main__.LinkerTests.test_charge_and_isotope_preservation) ... ok
+test_complete_aggregation_only (__main__.LinkerTests.test_complete_aggregation_only) ... ok
+test_four_observed_tetrazole_forms (__main__.LinkerTests.test_four_observed_tetrazole_forms) ... ok
+test_identical_xyz_for_equivalent_inputs (__main__.LinkerTests.test_identical_xyz_for_equivalent_inputs) ... ok
+test_incomplete_enumeration_is_rejected (__main__.LinkerTests.test_incomplete_enumeration_is_rejected) ... ok
+test_ligand_families (__main__.LinkerTests.test_ligand_families) ... ok
+test_optimized_energy_uses_final_summary (__main__.LinkerTests.test_optimized_energy_uses_final_summary) ... ok
+test_raw_stats_parser_and_driver_audit (__main__.LinkerTests.test_raw_stats_parser_and_driver_audit) ... [predict] ERROR: incomplete organic fragment set in /tmp/tmp8zz_g8d5/linker_stats.txt; see /tmp/tmp8zz_g8d5/fragment_standardization.json
+ok
+test_stereochemistry_and_atom_maps (__main__.LinkerTests.test_stereochemistry_and_atom_maps) ... ok
+test_unsupported_inputs_and_no_partial_sets (__main__.LinkerTests.test_unsupported_inputs_and_no_partial_sets) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 3.473s
+
+OK

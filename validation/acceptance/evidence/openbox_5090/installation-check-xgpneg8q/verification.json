@@ -1,0 +1,19 @@
+{
+  "state": "PASS",
+  "checks": {
+    "solvent_removal_stability": true,
+    "Linker_HOMO_[eV]": true,
+    "sascore": true,
+    "rmsd_within_original_cross_cpu_window": true,
+    "complete_score": true,
+    "score_close": true,
+    "ehull_close": true,
+    "converged": true
+  },
+  "info": {
+    "rmsd_equals_xj2_reference": false,
+    "rmsd": 0.8329443893595333
+  },
+  "work": "/home/sun07ao/syn_perf_20261023/v3/openbox31_5090/mofsynth-fast/runs/installation-check-xgpneg8q",
+  "prediction": "/home/sun07ao/syn_perf_20261023/v3/openbox31_5090/mofsynth-fast/runs/installation-check-xgpneg8q/prediction.json"
+}

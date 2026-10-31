@@ -1,0 +1,5 @@
+ 09:22:19 up 10 days, 17:21,  7 users,  load average: 31.97, 36.47, 53.63
+0, NVIDIA GeForce RTX 4090, 100 %, 1051 MiB
+1, NVIDIA GeForce RTX 4090, 93 %, 502 MiB
+2, NVIDIA GeForce RTX 4090, 100 %, 14662 MiB
+3, NVIDIA GeForce RTX 4090, 97 %, 6468 MiB

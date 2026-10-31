@@ -1,0 +1,15 @@
+{
+  "state": "PASS",
+  "modified_original_files": [
+    "README.txt",
+    "predict/predict_synthesizability.py",
+    "predict/rules/canonical_linker_qm.py",
+    "predict/rules/standardize_linker_smiles.py",
+    "VERSION"
+  ],
+  "all_other_archive_files_byte_identical": true,
+  "baseline_unchanged": true,
+  "original_zip_sha256": "663bbe7295fb4861d3945a4ee49584dacdcce4c15b109325092dd15e3e87e465",
+  "patch_dry_run": "PASS",
+  "patch_applied_copy_byte_identical": true
+}

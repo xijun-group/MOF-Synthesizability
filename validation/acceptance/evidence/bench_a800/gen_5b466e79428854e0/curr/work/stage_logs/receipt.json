@@ -1,0 +1,39 @@
+{
+  "state": "complete",
+  "stage_jobs": 3,
+  "wall_s": 50.38141274172813,
+  "stages": {
+    "rmsd": {
+      "state": "complete",
+      "stage": "rmsd",
+      "wall_s": 11.176050279289484,
+      "returncode": 0,
+      "process_wall_s": 11.705245341174304,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/gen_5b466e79428854e0/curr/work/stage_logs/rmsd.log"
+    },
+    "mofsimplify": {
+      "state": "complete",
+      "stage": "mofsimplify",
+      "wall_s": 15.010006823111326,
+      "returncode": 0,
+      "process_wall_s": 15.486254158895463,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/gen_5b466e79428854e0/curr/work/stage_logs/mofsimplify.log"
+    },
+    "channel_b": {
+      "state": "complete",
+      "stage": "channel_b",
+      "wall_s": 3.9760450180619955,
+      "returncode": 0,
+      "process_wall_s": 4.475785729940981,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/gen_5b466e79428854e0/curr/work/stage_logs/channel_b.log"
+    },
+    "ehull": {
+      "state": "complete",
+      "stage": "ehull",
+      "wall_s": 49.898799864109606,
+      "returncode": 0,
+      "process_wall_s": 50.37252446077764,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/gen_5b466e79428854e0/curr/work/stage_logs/ehull.log"
+    }
+  }
+}

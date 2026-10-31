@@ -1,0 +1,2 @@
+ 09:08:17 up 32 days, 17:53, 56 users,  load average: 6.75, 11.09, 28.48
+0, NVIDIA A800 80GB PCIe, 93 %, 635 MiB

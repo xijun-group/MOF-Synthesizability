@@ -1,0 +1,415 @@
+--- a/predict/predict_synthesizability.py
++++ b/predict/predict_synthesizability.py
+@@ -292,24 +292,13 @@
+ # ----------------------------------------------------------------------------- step 2
+ def step_fragment_set(ctx, stats: Path, work: Path) -> dict:
+     """Organic-filtered canonical MOFid linker set + the standardised neutral identities."""
+-    s4 = load_module("predict_rules_s4", ctx["rules"] / "s4_step3_linker_topology.py")
+     std_mod = load_module("predict_rules_std", ctx["rules"] / "standardize_linker_smiles.py")
+-    s4._init_worker()
+-    parsed = s4.parse_linkers(stats)
+-    cset = parsed.get("canonical_linker_set")
+-    if not cset:
+-        die(f"no parsable organic linker fragment in {stats} "
+-            f"(status={parsed.get('linker_parse_status')})", 3)
+-    canon = [f.strip() for f in cset.split(s4.SEPARATOR) if f.strip()]
+-    std, failed = [], []
+-    for frag in canon:
+-        s = std_mod.standardize_fragment_smiles(frag)
+-        (std.append(s) if s else failed.append(frag))
+-    std = sorted(set(std))
+-    return {"canonical_set": canon, "standardised_set": std,
+-            "n_fragments": len(canon), "n_standardised": len(std),
+-            "unstandardisable": failed,
+-            "linker_parse_status": parsed.get("linker_parse_status")}
++    parsed = std_mod.standardize_mofid_linker_stats(stats)
++    audit = work / "fragment_standardization.json"
++    audit.write_text(json.dumps(parsed, indent=2) + "\n")
++    if not parsed["complete"]:
++        die(f"incomplete organic fragment set in {stats}; see {audit}", 3)
++    return parsed
+ 
+ 
+ def score_fragments(ctx, smiles_set) -> dict:
+@@ -328,8 +317,9 @@
+         out[s] = v
+         if v is not None and math.isfinite(v):
+             vals.append(v)
+-    return {"per_fragment": out, "sascore": (max(vals) if vals else None),
+-            "n_scored": len(vals)}
++    complete = bool(smiles_set) and len(vals) == len(smiles_set)
++    return {"per_fragment": out, "sascore": (max(vals) if complete else None),
++            "n_scored": len(vals), "complete": complete}
+ 
+ 
+ # ----------------------------------------------------------------------------- step 2b
+@@ -337,7 +327,7 @@
+     """The delivered channel-B reduction: the max over the fragment set, defined only when
+     every fragment of the set has a converged HOMO (objectABC_v1's completeness rule)."""
+     per = {s: per_fragment.get(s) for s in std_set}
+-    vals = [v for v in per.values() if v is not None]
++    vals = [v for v in per.values() if v is not None and math.isfinite(v)]
+     complete = bool(std_set) and len(vals) == len(std_set)
+     return {"per_fragment": per, "complete": complete,
+             "B": (max(vals) if complete else None),
+--- a/predict/rules/canonical_linker_qm.py
++++ b/predict/rules/canonical_linker_qm.py
+@@ -155,12 +155,15 @@
+ 
+ def parse_total_energy(check_out: Path):
+     pat = re.compile(r"::\s+total energy\s+(-?[\d.]+)\s+Eh")
++    energy = None
+     with check_out.open(errors="replace") as f:
+         for line in f:
+             mobj = pat.search(line)
+             if mobj:
+-                return float(mobj.group(1))
+-    return None
++                # --opt prints an initial and a final summary. The first
++                # summary is the embedded geometry, not the optimised energy.
++                energy = float(mobj.group(1))
++    return energy
+ 
+ 
+ def run_one(std_linker: str, run_dir: Path) -> dict:
+--- a/predict/rules/standardize_linker_smiles.py
++++ b/predict/rules/standardize_linker_smiles.py
+@@ -28,35 +28,210 @@
+ 
+ What this module does
+ ---------------------
+-`standardize_fragment_smiles` maps any of those representations onto one
+-canonical neutral parent, by
+-
+-  1. capping every radical centre with an explicit hydrogen (the cut bond is
++The v2 rule repairs recognised carboxyl multiradicals and azole ring radicals
++BEFORE H capping, then selects a canonical tautomer AFTER neutralisation.
++This defines a descriptor parent, not the energetically preferred tautomer.
++The per-fragment audit and standardizer_protocol() record the convention.
++
++`standardize_fragment_smiles` maps supported representations onto one parent, by
++
++  1. repairing recognised bond-perception artefacts, then capping remaining
++     radical centres with an explicit hydrogen (the cut bond is
+      replaced by H), then
+   2. neutralising surplus charge with RDKit's Uncharger (anionic carboxylate /
+      alkoxide / thiolate -> acid; cations deprotonated where possible; a
+      genuinely quaternary N+ has no removable H and is left charged), then
+-  3. re-sanitising and writing the canonical SMILES.
++  3. re-sanitising and selecting the canonical tautomer after complete
++     enumeration. Permanent charges and isotopes are preserved.
+ 
+ `standardize_linker_set` applies the same rule to a whole `' || '`-joined
+ linker set and returns the re-sorted, de-duplicated canonical set.
+ 
+-Both are pure functions of the input string; nothing is imputed and no row is
+-dropped.  Unparsable fragments are reported, never silently repaired.
++Results depend on the recorded RDKit version. No connectivity is inferred.
++Disconnected, dummy and unsupported inputs fail explicitly. A set containing
++a failed fragment has no defined aggregate; it is never silently truncated.
+ """
+ 
+ from __future__ import annotations
+ 
+ import hashlib
+ 
+-from rdkit import Chem, RDLogger
++from pathlib import Path
++
++from rdkit import Chem, rdBase
+ from rdkit.Chem.MolStandardize import rdMolStandardize
+ 
+-RDLogger.DisableLog("rdApp.*")
+-
+ SEPARATOR = " || "
+-
+-_UNCHARGER = rdMolStandardize.Uncharger()
++STANDARDIZER_VERSION = "mofid-neutral-parent-v2-azole-tautomer-20261024"
++ALLOWED_ELEMENTS = {"C", "H", "N", "O", "S", "P", "F", "Cl", "Br", "I", "B", "Si"}
++
++_UNCHARGER = rdMolStandardize.Uncharger(canonicalOrder=True)
++
++
++def standardizer_protocol():
++    return {"version": STANDARDIZER_VERSION, "rdkit_version": rdBase.rdkitVersion,
++            "tautomer_max_tautomers": 1000, "tautomer_max_transforms": 1000,
++            "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
++            "remaining_radicals": "legacy one-H-per-radical-electron capping",
++            "stereochemistry": "retain unless changed by RDKit tautomer enumeration"}
++
++
++def _repair_carboxyl_multiradicals(mol, repairs):
++    """Restore [O][C]([O])R before capping can turn it into a geminal diol."""
++    for carbon in mol.GetAtoms():
++        if (carbon.GetAtomicNum() != 6 or carbon.GetDegree() != 3 or
++                carbon.GetFormalCharge() or carbon.GetNumRadicalElectrons() != 1 or
++                carbon.GetTotalNumHs() or
++                any(b.GetBondType() != Chem.BondType.SINGLE for b in carbon.GetBonds())):
++            continue
++        oxygens = [a for a in carbon.GetNeighbors() if a.GetAtomicNum() == 8 and
++                   a.GetDegree() == 1 and a.GetFormalCharge() in (0, -1)]
++        radicals = [a for a in oxygens if a.GetNumRadicalElectrons() == 1 and
++                    a.GetFormalCharge() == 0 and not a.GetTotalNumHs()]
++        if len(oxygens) != 2 or not radicals:
++            continue
++        ranks = Chem.CanonicalRankAtoms(mol, breakTies=False)
++        oxygen = min(radicals, key=lambda a: (ranks[a.GetIdx()], a.GetIdx()))
++        mol.GetBondBetweenAtoms(carbon.GetIdx(), oxygen.GetIdx()).SetBondType(Chem.BondType.DOUBLE)
++        carbon.SetNumRadicalElectrons(0)
++        oxygen.SetNumRadicalElectrons(0)
++        for other in oxygens:
++            if other.GetIdx() != oxygen.GetIdx() and other.GetNumRadicalElectrons() == 1:
++                other.SetNumRadicalElectrons(0)
++                other.SetFormalCharge(-1)
++        repairs.append("carboxyl_multiradical_to_carboxylate")
++    mol.UpdatePropertyCache(strict=False)
++
++
++def _repair_azoles(mol, repairs):
++    rings = list(mol.GetRingInfo().AtomRings())
++    charge_sites = []
++    for ring in rings:
++        if len(ring) != 5:
++            continue
++        atoms = [mol.GetAtomWithIdx(i) for i in ring]
++        if any(a.GetAtomicNum() not in (6, 7) for a in atoms):
++            continue
++        nitrogens = [a for a in atoms if a.GetAtomicNum() == 7]
++        if not nitrogens:
++            continue
++        # Only remove surplus [n-] when a pyrrolic donor already exists.
++        # A blanket string replacement would damage valid azolate anions.
++        anions = [a for a in nitrogens if a.GetFormalCharge() == -1]
++        donors = [a for a in nitrogens if a.GetFormalCharge() == 0 and
++                  (a.GetTotalNumHs() == 1 or a.GetDegree() == 3)]
++        if (all(a.GetIsAromatic() for a in atoms) and len(anions) == 1 and
++                len(donors) == 1 and anions[0].GetDegree() == 2 and
++                not anions[0].GetTotalNumHs()):
++            anions[0].SetFormalCharge(0)
++            repairs.append("azole_surplus_pyridine_N_charge")
++        # Conjugated, isolated C/N five-ring, exactly one radical electron,
++        # no existing N-H or N-substitution: the radical is a delocalised
++        # deprotonation artefact. Do not repair fused/ambiguous radical rings.
++        if any(set(ring) & set(other) for other in rings if other != ring):
++            continue
++        bonds = [mol.GetBondBetweenAtoms(ring[i], ring[(i + 1) % 5]) for i in range(5)]
++        if (any(b is None for b in bonds) or
++                sum(b.GetBondType() == Chem.BondType.DOUBLE for b in bonds) != 2 or
++                any(b.GetBondType() not in (Chem.BondType.SINGLE, Chem.BondType.DOUBLE) for b in bonds) or
++                sum(a.GetNumRadicalElectrons() for a in atoms) != 1 or
++                any(a.GetFormalCharge() for a in atoms) or
++                any(a.GetDegree() != 2 or a.GetTotalNumHs() for a in nitrogens)):
++            continue
++        ring_set = set(ring)
++        if any(b.GetBondType() != Chem.BondType.SINGLE for a in atoms for b in a.GetBonds()
++               if b.GetOtherAtomIdx(a.GetIdx()) not in ring_set):
++            continue
++        for atom in atoms:
++            atom.SetIsAromatic(True)
++            atom.SetNumRadicalElectrons(0)
++            atom.SetNumExplicitHs(0)
++            atom.SetNoImplicit(atom.GetAtomicNum() == 7)
++        for bond in bonds:
++            bond.SetBondType(Chem.BondType.AROMATIC)
++            bond.SetIsAromatic(True)
++        charge_sites.append([a.GetIdx() for a in nitrogens])
++        repairs.append("azole_ring_radical_to_delocalised_azolate")
++    mol.UpdatePropertyCache(strict=False)
++    if charge_sites:
++        # Rank after all ring radical sites have been removed.
++        ranks = Chem.CanonicalRankAtoms(mol, breakTies=False)
++        for candidates in charge_sites:
++            mol.GetAtomWithIdx(min(candidates, key=lambda i: (ranks[i], i))).SetFormalCharge(-1)
++    mol.UpdatePropertyCache(strict=False)
++
++
++def standardize_fragment_record(smiles, isomeric=True):
++    """Return the parent and explicit audit; never hide sanitisation failures.
++
++    This is a versioned descriptor convention, not an energy-ranked tautomer.
++    Atom connectivity is never inferred. Incomplete tautomer enumeration is
++    a failure, because selecting its partial set can depend on atom order.
++    """
++    record = {"raw_smiles": smiles, "standardized_smiles": None, "status": "failed",
++              "reason": "", "repairs": [], "standardizer_version": STANDARDIZER_VERSION}
++    try:
++        if not isinstance(smiles, str) or not smiles.strip():
++            raise ValueError("empty_or_nonstring_smiles")
++        params = Chem.SmilesParserParams()
++        params.sanitize = False
++        params.removeHs = False
++        params.parseName = False
++        mol = Chem.MolFromSmiles(smiles.strip(), params)
++        if mol is None or not mol.GetNumAtoms():
++            raise ValueError("invalid_smiles_syntax")
++        if any(a.GetSymbol() not in ALLOWED_ELEMENTS for a in mol.GetAtoms()):
++            raise ValueError("unsupported_element_or_attachment_dummy")
++        if len(Chem.GetMolFrags(mol)) != 1:
++            raise ValueError("disconnected_fragment_requires_explicit_membership")
++        for atom in mol.GetAtoms():
++            atom.SetAtomMapNum(0)
++        mol = Chem.RemoveHs(mol, sanitize=False)
++        # Assign radicals and rings WITHOUT kekulising malformed azolates.
++        Chem.SanitizeMol(mol, sanitizeOps=(Chem.SanitizeFlags.SANITIZE_CLEANUP |
++                         Chem.SanitizeFlags.SANITIZE_PROPERTIES |
++                         Chem.SanitizeFlags.SANITIZE_SYMMRINGS |
++                         Chem.SanitizeFlags.SANITIZE_FINDRADICALS))
++        record.update(n_radical_atoms=sum(bool(a.GetNumRadicalElectrons()) for a in mol.GetAtoms()),
++                      n_radical_electrons=sum(a.GetNumRadicalElectrons() for a in mol.GetAtoms()),
++                      formal_charge=Chem.GetFormalCharge(mol))
++        record["canonical_raw_smiles"] = Chem.MolToSmiles(mol)
++        _repair_carboxyl_multiradicals(mol, record["repairs"])
++        _repair_azoles(mol, record["repairs"])
++        for ring in mol.GetRingInfo().AtomRings():
++            atoms = [mol.GetAtomWithIdx(i) for i in ring]
++            if (len(ring) == 5 and any(a.GetAtomicNum() == 7 for a in atoms) and
++                    all(a.GetAtomicNum() in (6, 7) for a in atoms) and
++                    any(a.GetNumRadicalElectrons() for a in atoms)):
++                raise ValueError("unsupported_azole_radical_pattern")
++        n_capped = _cap_radicals_with_h(mol)
++        if n_capped:
++            record["repairs"].append(f"H_cap_remaining_radical_centres:{n_capped}")
++        Chem.SanitizeMol(mol)
++        mol = _UNCHARGER.uncharge(mol)
++        Chem.SanitizeMol(mol)
++        if not isomeric:
++            Chem.RemoveStereochemistry(mol)
++        mol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
++        enumerator = rdMolStandardize.TautomerEnumerator()
++        enumerator.SetMaxTautomers(1000)
++        enumerator.SetMaxTransforms(1000)
++        tautomers = enumerator.Enumerate(mol)
++        record["tautomer_status"] = str(tautomers.status)
++        record["n_tautomers"] = len(tautomers)
++        if tautomers.status != rdMolStandardize.TautomerEnumeratorStatus.Completed:
++            raise ValueError("incomplete_tautomer_enumeration:" + str(tautomers.status))
++        parent = enumerator.PickCanonical(tautomers)
++        Chem.SanitizeMol(parent)
++        if any(a.GetNumRadicalElectrons() for a in parent.GetAtoms()):
++            raise ValueError("residual_radical_after_standardization")
++        if not isomeric:
++            Chem.RemoveStereochemistry(parent)
++        record.update(status="ok", standardized_smiles=Chem.MolToSmiles(parent),
++                      standardized_formal_charge=Chem.GetFormalCharge(parent))
++    except Exception as exc:
++        record["reason"] = str(exc)
++    return record
+ 
+ __all__ = [
+     "SEPARATOR",
+@@ -64,6 +239,9 @@
+     "standardize_linker_set",
+     "linker_set_id",
+     "fragment_provenance",
++    "standardize_fragment_record",
++    "standardize_mofid_linker_stats",
++    "standardizer_protocol",
+ ]
+ 
+ 
+@@ -90,32 +268,7 @@
+     The transformation is idempotent: standardising an already-standardised
+     SMILES returns the same string.
+     """
+-    if smiles is None:
+-        return None
+-    smiles = smiles.strip()
+-    if not smiles:
+-        return None
+-    mol = Chem.MolFromSmiles(smiles)
+-    if mol is None:
+-        return None
+-    mol = Chem.RWMol(mol)
+-    _cap_radicals_with_h(mol)
+-    mol = mol.GetMol()
+-    try:
+-        Chem.SanitizeMol(mol)
+-    except Exception:
+-        return None
+-    try:
+-        mol = _UNCHARGER.uncharge(mol)
+-    except Exception:
+-        return None
+-    try:
+-        Chem.SanitizeMol(mol)
+-    except Exception:
+-        return None
+-    if not isomeric:
+-        Chem.RemoveStereochemistry(mol)
+-    return Chem.MolToSmiles(mol)
++    return standardize_fragment_record(smiles, isomeric)["standardized_smiles"]
+ 
+ 
+ def fragment_provenance(smiles):
+@@ -123,22 +276,13 @@
+ 
+     Returns a dict with the flags used by the audit, or None if unparsable.
+     """
+-    mol = Chem.MolFromSmiles(smiles)
+-    if mol is None:
++    record = standardize_fragment_record(smiles)
++    if "n_radical_atoms" not in record:
+         return None
+-    n_radical_atoms = sum(1 for a in mol.GetAtoms() if a.GetNumRadicalElectrons())
+-    n_radical_electrons = sum(a.GetNumRadicalElectrons() for a in mol.GetAtoms())
+-    charge = Chem.GetFormalCharge(mol)
+-    std = standardize_fragment_smiles(smiles)
+-    return {
+-        "n_radical_atoms": n_radical_atoms,
+-        "n_radical_electrons": n_radical_electrons,
+-        "formal_charge": charge,
+-        "has_radical": n_radical_atoms > 0,
+-        "has_charge": charge != 0,
+-        "needs_standardization": std is not None and std != Chem.MolToSmiles(mol),
+-        "standardized_smiles": std,
+-    }
++    record.update(has_radical=bool(record["n_radical_atoms"]), has_charge=bool(record["formal_charge"]),
++                  needs_standardization=(record["standardized_smiles"] is not None and
++                                         record["standardized_smiles"] != record.get("canonical_raw_smiles")))
++    return record
+ 
+ 
+ def linker_set_id(canonical_linker_set: str) -> str:
+@@ -161,10 +305,41 @@
+             n_unparsable += 1
+         else:
+             out.add(std)
+-    if not out:
++    if n_unparsable or not out:
+         return None, None, len(fragments), n_unparsable
+     joined = SEPARATOR.join(sorted(out))
+     return joined, linker_set_id(joined), len(fragments), n_unparsable
++
++
++def standardize_mofid_linker_stats(path):
++    """Read raw column 6 before sanitisation; audit exclusions and failures."""
++    records, excluded = [], []
++    for line_no, line in enumerate(Path(path).read_text().splitlines(), 1):
++        if not line.strip():
++            continue
++        columns = line.split("\t")
++        if len(columns) < 6 or not columns[5].strip():
++            records.append({"line": line_no, "raw_smiles": None, "status": "failed",
++                            "standardized_smiles": None, "reason": "malformed_linker_stats_row"})
++            continue
++        raw = columns[5].strip()
++        mol = Chem.MolFromSmiles(raw, sanitize=False)
++        if mol is not None and any(a.GetSymbol() not in ALLOWED_ELEMENTS for a in mol.GetAtoms()):
++            excluded.append({"line": line_no, "raw_smiles": raw,
++                             "reason": "outside_existing_organic_element_allowlist"})
++            continue
++        record = standardize_fragment_record(raw)
++        record["line"] = line_no
++        records.append(record)
++    failed = [r for r in records if r["status"] != "ok"]
++    parents = sorted({r["standardized_smiles"] for r in records if r["status"] == "ok"})
++    return {"canonical_set": sorted({r["canonical_raw_smiles"] for r in records if r.get("canonical_raw_smiles")}),
++            "raw_set": sorted({r["raw_smiles"] for r in records if r["raw_smiles"]}),
++            "standardised_set": parents, "n_fragments": len(records),
++            "n_standardised": len(parents), "complete": bool(records) and not failed,
++            "unstandardisable": failed, "excluded_fragments": excluded,
++            "fragment_records": records, "standardizer": standardizer_protocol(),
++            "linker_parse_status": "ok" if records and not failed else "incomplete_organic_set"}
+ 
+ 
+ if __name__ == "__main__":

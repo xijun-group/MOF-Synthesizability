@@ -1,0 +1,31 @@
+{
+  "state": "PASS",
+  "checks": {
+    "11_regression_groups": true,
+    "1482_real_parent_invariance_checks": true,
+    "two_fresh_xtb_runs": true,
+    "original_checksum_and_frozen_baseline": true,
+    "patch_applies_exactly": true
+  },
+  "run": "mofsynth_linker_postprocess_fix_v1_20261024",
+  "scope": "postprocessing implementation and scoped regression/sample/QM verification only",
+  "not_executed": [
+    "full CIF/GPU five-feature inference",
+    "population feature rebuild",
+    "model retraining or rescoring"
+  ],
+  "real_sample": {
+    "sampled": 1647,
+    "ok": 1482,
+    "changed": 727,
+    "rescued": 409,
+    "previously_valued_now_rejected": 85,
+    "idempotent_checked": 1482,
+    "atom_reorder_checked": 1482,
+    "failed": 165
+  },
+  "qm_homo_eV": [
+    -9.9582,
+    -9.9582
+  ]
+}

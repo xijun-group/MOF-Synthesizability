@@ -1,0 +1,1 @@
+{"id": "gen_2aed42338cd9ddfb", "model": "/home/sun07ao/syn_perf_20261023/v3/openbox_a800/mofsynth-fast/runtime/qmof-ehull/UMA/checkpoints/uma-s-1p1.pt", "fmax_target": 0.03, "max_steps": 10000, "fix_cell": false, "converged": true, "nsteps": 466, "final_energy": -2477.962847432301, "final_volume": 49579.336286895435, "final_fmax": 0.02695559896528721}

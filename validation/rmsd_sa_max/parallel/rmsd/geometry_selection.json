@@ -1,0 +1,1069 @@
+{
+  "protocol": "rmsd-deltae-sa-max-parent-v2-20261024",
+  "target_parent": "c1cc2cncc3ccc4cncc1c4c23",
+  "target_sa": 2.2235212228095467,
+  "sa_tied_parents": [
+    "c1cc2cncc3ccc4cncc1c4c23"
+  ],
+  "sa_tie_rule": "exact maximum; lexicographic canonical SMILES",
+  "geometry_copy_rule": "most explicit atoms among exact-parent matches; first component on tie",
+  "standardizer": {
+    "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+    "rdkit_version": "2026.03.6",
+    "tautomer_max_tautomers": 1000,
+    "tautomer_max_transforms": 1000,
+    "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+    "remaining_radicals": "legacy one-H-per-radical-electron capping",
+    "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+  },
+  "openbabel_version": "3.1.0",
+  "linkers_cif": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/mofid_supercell2/mofid/Output_original/MetalOxo/linkers.cif",
+  "linkers_cif_sha256": "73cc8a34d0d4ce9cdb9b3165f5ce050853ccd0094b66bb53ce5b7966890666c7",
+  "components": [
+    {
+      "component_index": 0,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 1,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 2,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 3,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 4,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 5,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 6,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 7,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 8,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 9,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 10,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 11,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 12,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 13,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 14,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 15,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 16,
+      "natoms": 30,
+      "raw_geometry_smiles": "[O]C(=O)c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 17,
+      "natoms": 28,
+      "raw_geometry_smiles": "[C]c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 18,
+      "natoms": 28,
+      "raw_geometry_smiles": "[C]c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 19,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 20,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 21,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 22,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 23,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 24,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 25,
+      "natoms": 11,
+      "raw_geometry_smiles": "[C]C1=[C]C(=CN=C1)[CH]",
+      "raw_geometry_formula": "C7H3N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 26,
+      "natoms": 22,
+      "raw_geometry_smiles": "n1cc2=[C][C]=c3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H6N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 27,
+      "natoms": 30,
+      "raw_geometry_smiles": "[O]C(=O)c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 28,
+      "natoms": 30,
+      "raw_geometry_smiles": "[O]C(=O)c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 29,
+      "natoms": 28,
+      "raw_geometry_smiles": "[C]c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 30,
+      "natoms": 28,
+      "raw_geometry_smiles": "[C]c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 31,
+      "natoms": 30,
+      "raw_geometry_smiles": "[O]C(=O)c1cc2ccc3c4c2c(c1)ccc4cc(c3)C(=O)[O]",
+      "raw_geometry_formula": "C18H8O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 32,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 33,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 34,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 35,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 36,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 37,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 38,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 39,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 40,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 41,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 42,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 43,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 44,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 45,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 46,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 47,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 48,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    {
+      "component_index": 49,
+      "natoms": 11,
+      "raw_geometry_smiles": "[C]C1=[C]C(=CN=C1)[CH]",
+      "raw_geometry_formula": "C7H3N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 50,
+      "natoms": 22,
+      "raw_geometry_smiles": "n1cc2=[C][C]=c3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H6N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 51,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 52,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 53,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 54,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 55,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 56,
+      "natoms": 11,
+      "raw_geometry_smiles": "[C]C1=[C]C(=CN=C1)[CH]",
+      "raw_geometry_formula": "C7H3N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 57,
+      "natoms": 12,
+      "raw_geometry_smiles": "[CH]C1=CN=CC(=[C]1)[CH]",
+      "raw_geometry_formula": "C7H4N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 58,
+      "natoms": 11,
+      "raw_geometry_smiles": "[C]C1=[C]C(=CN=C1)[CH]",
+      "raw_geometry_formula": "C7H3N",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "Cc1cncc(C)c1",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:3"
+      ]
+    },
+    {
+      "component_index": 59,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 60,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 61,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 62,
+      "natoms": 1,
+      "raw_geometry_smiles": "[H]",
+      "raw_geometry_formula": "H",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "[HH]",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 63,
+      "natoms": 20,
+      "raw_geometry_smiles": "[O]C(=O)c1ccc(c2c1CC2)C(=O)[O]",
+      "raw_geometry_formula": "C10H6O4",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O=C(O)c1ccc(C(=O)O)c2c1CC2",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:2"
+      ]
+    },
+    {
+      "component_index": 64,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 65,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 66,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 67,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 68,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 69,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 70,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 71,
+      "natoms": 10,
+      "raw_geometry_smiles": "[CH]/C(=[C]/[CH2])/C(=O)[O]",
+      "raw_geometry_formula": "C5H3O2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "C/C=C(/C)C(=O)O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:4"
+      ]
+    },
+    {
+      "component_index": 72,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 73,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 74,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 75,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 76,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 77,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 78,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    },
+    {
+      "component_index": 79,
+      "natoms": 1,
+      "raw_geometry_smiles": "[O]",
+      "raw_geometry_formula": "O",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "O",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": [
+        "H_cap_remaining_radical_centres:1"
+      ]
+    }
+  ],
+  "n_components": 80,
+  "coordinates": "original parsed framework geometry; no embedding or H addition",
+  "identity_normalization_changes_geometry": false,
+  "status": "ok",
+  "chosen": {
+    "component_index": 0,
+    "natoms": 24,
+    "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+    "raw_geometry_formula": "C14H8N2",
+    "raw_geometry_formal_charge": 0,
+    "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+    "status": "ok",
+    "reason": "",
+    "repairs_for_identity_only": []
+  },
+  "n_matching_components": 8,
+  "selected_xyz_sha256": "a2c006542f45bfc3f38418a79575ff8f3cf9ed6832172e0cb4bc42ad5634a116"
+}

@@ -1,0 +1,39 @@
+{
+  "state": "complete",
+  "stage_jobs": 3,
+  "wall_s": 25.918939776718616,
+  "stages": {
+    "rmsd": {
+      "state": "complete",
+      "stage": "rmsd",
+      "wall_s": 9.228077681735158,
+      "returncode": 0,
+      "process_wall_s": 9.768924703355879,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/curr/work/stage_logs/rmsd.log"
+    },
+    "mofsimplify": {
+      "state": "complete",
+      "stage": "mofsimplify",
+      "wall_s": 10.74959903396666,
+      "returncode": 0,
+      "process_wall_s": 11.227042167913169,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/curr/work/stage_logs/mofsimplify.log"
+    },
+    "channel_b": {
+      "state": "complete",
+      "stage": "channel_b",
+      "wall_s": 9.988647690974176,
+      "returncode": 0,
+      "process_wall_s": 10.505190839059651,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/curr/work/stage_logs/channel_b.log"
+    },
+    "ehull": {
+      "state": "complete",
+      "stage": "ehull",
+      "wall_s": 25.431170183233917,
+      "returncode": 0,
+      "process_wall_s": 25.909155672881752,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/curr/work/stage_logs/ehull.log"
+    }
+  }
+}

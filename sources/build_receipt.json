@@ -1,0 +1,83 @@
+{
+  "state": "complete",
+  "host": "ubuntu-NF5468-A7-A0-R0-00",
+  "start_unix": 1792772478.1346583,
+  "source": "/home/sun07ao/syn_release_review_20261011/runtime/mofsimplify-repo/zeo++-0.3",
+  "cpu_affinity": [
+    480,
+    481,
+    482,
+    483,
+    484,
+    485,
+    486,
+    487
+  ],
+  "command": [
+    "make",
+    "-j8",
+    "CFLAGS=-O2 -g -fno-fast-math -ffp-contract=off -fno-tree-vectorize -fno-strict-aliasing",
+    "network"
+  ],
+  "flags": [
+    "-O2",
+    "-g",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fno-tree-vectorize",
+    "-fno-strict-aliasing"
+  ],
+  "compiler": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "build_returncode": 0,
+  "original_binary_sha256": "5c46c867d280ff74b0b101284651b65d7d690eed40d5d5d665211e8c01ba661f",
+  "candidate_binary_sha256": "fd10ec84d4641057e216c0173f94bc237842b6cb71c5cb958976e6da632016ba",
+  "binary_bytes": 31032536,
+  "original_glibc_requirements": [
+    "GLIBC_2.2.5",
+    "GLIBC_2.3.4",
+    "GLIBC_2.4",
+    "GLIBC_2.7",
+    "GLIBC_2.14",
+    "GLIBC_2.29",
+    "GLIBC_2.34"
+  ],
+  "original_glibcxx_requirements": [
+    "GLIBCXX_3.4",
+    "GLIBCXX_3.4.20",
+    "GLIBCXX_3.4.21",
+    "GLIBCXX_3.4.26",
+    "GLIBCXX_3.4.29"
+  ],
+  "candidate_glibc_requirements": [
+    "GLIBC_2.2.5",
+    "GLIBC_2.3.4",
+    "GLIBC_2.4",
+    "GLIBC_2.7",
+    "GLIBC_2.14",
+    "GLIBC_2.29",
+    "GLIBC_2.34"
+  ],
+  "candidate_glibcxx_requirements": [
+    "GLIBCXX_3.4",
+    "GLIBCXX_3.4.9",
+    "GLIBCXX_3.4.11",
+    "GLIBCXX_3.4.20",
+    "GLIBCXX_3.4.21",
+    "GLIBCXX_3.4.29"
+  ],
+  "end_unix": 1792772500.6886466,
+  "wall_s": 22.553988218307495,
+  "verification_returncode": 0,
+  "verification_command": [
+    "/home/sun07ao/syn_release_review_20261011/runtime/mofsimplify-env/bin/python",
+    "/home/sun07ao/syn_perf_20261023/v2/cpu/verify_zeo.py",
+    "--original",
+    "/home/sun07ao/syn_release_review_20261011/runtime/mofsimplify-repo/zeo++-0.3/network",
+    "--candidate",
+    "/home/sun07ao/syn_perf_20261023/v2/cpu/zeo_strict/network",
+    "--input-root",
+    "/home/sun07ao/syn_perf_20261023/cpu_candidate/verification/racs",
+    "--out",
+    "/home/sun07ao/syn_perf_20261023/v2/cpu/zeo_strict/verification"
+  ]
+}

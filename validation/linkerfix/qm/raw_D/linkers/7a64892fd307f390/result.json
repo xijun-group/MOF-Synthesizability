@@ -1,0 +1,33 @@
+{
+  "std_linker": "c1ccc2c(-c3nn[nH]n3)cc(-c3nn[nH]n3)c-2cc1",
+  "identity_key": "7a64892fd307f390",
+  "status": "converged",
+  "embed_method": "ETKDGv3",
+  "n_confs": 16,
+  "chosen_conf": 14,
+  "force_field": "MMFF",
+  "ff_energy": 128.56012973926312,
+  "embed_seed": 12648430,
+  "natoms": 28,
+  "sp_preopt": {
+    "returncode": 0,
+    "elapsed_s": 0.06140841403976083
+  },
+  "homo_sp_preopt_eV": -10.0674,
+  "lumo_sp_preopt_eV": -8.2723,
+  "sp_preopt_energy_hartree": -53.007036042955,
+  "opt": {
+    "returncode": 0,
+    "elapsed_s": 0.5228625149466097
+  },
+  "opt_energy_hartree": -53.047652245955,
+  "sp": {
+    "returncode": 0,
+    "elapsed_s": 0.0605564599391073
+  },
+  "homo_eV": -9.9582,
+  "lumo_eV": -8.172,
+  "sp_energy_hartree": -53.047652244622,
+  "gap_eV": 1.7861999999999991,
+  "elapsed_total_s": 0.9744039109209552
+}

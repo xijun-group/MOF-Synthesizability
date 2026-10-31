@@ -1,0 +1,31 @@
+{
+  "state": "complete",
+  "stage_jobs": 3,
+  "wall_s": 13.495540758944117,
+  "stages": {
+    "rmsd": {
+      "state": "complete",
+      "stage": "rmsd",
+      "wall_s": 7.786621247068979,
+      "returncode": 0,
+      "process_wall_s": 8.024449861957692,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/reference58/work/stage_logs/rmsd.log"
+    },
+    "mofsimplify": {
+      "state": "complete",
+      "stage": "mofsimplify",
+      "wall_s": 8.303488756995648,
+      "returncode": 0,
+      "process_wall_s": 8.482242510886863,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/reference58/work/stage_logs/mofsimplify.log"
+    },
+    "channel_b": {
+      "state": "complete",
+      "stage": "channel_b",
+      "wall_s": 9.993416633922607,
+      "returncode": 0,
+      "process_wall_s": 10.189415532979183,
+      "log": "/home/sun07ao/syn_perf_20261023/v3/cpu_panel_v3/reference58/work/stage_logs/channel_b.log"
+    }
+  }
+}

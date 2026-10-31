@@ -1,0 +1,53 @@
+MOFSynth Fast 3.1 验收结果（2026-10-24）
+
+对照对象均为随包冻结的原始串行实现（predict.sh --baseline），同一台机器、同一组输入、等长的全新工作路径
+（原始 MOFid 的输出依赖工作路径长度，见第五节）。输入为 5 个验证 MOF（examples/，58–436 原子）。
+
+一、完整五特征流程（每平台 5 MOF，原始 / 本包交替顺序；evidence/bench_*/）
+GPU 均与他人共享时测量，负载快照见各运行的 load_before.txt。
+  平台                                          原始 s   本包 s   合计倍数  中位数  单个最高   判定
+  RTX 5090 + Ryzen 9 9950X3D（WSL2）             827.4    241.4    3.43x    2.97x   9.91x     5/5
+  RTX 4090 + EPYC 9754                          1205.3    493.3    2.44x    1.99x   5.63x     5/5
+  A800 + EPYC                                   1074.9    376.9    2.85x    2.74x   7.06x     4/5
+判定项：CPU 四特征及全部中间量（片段集合、逐片段 HOMO、SA、RMSD 各方法值与 linker 结构哈希、192 列描述符字节）
+与同机原始实现逐位相同；放宽收敛；Ehull 偏差不超过原始实现自身样本的范围。
+15 组中 14 组全部通过。未通过的一组：A800 上 gen_eed3ec90c711abe1 的放宽落在原始实现也会到达的替代极小区域
+（体积约 5.4e4 Å^3、500 余步），Ehull 0.427742，比原始实现在该极小的 3 个样本（0.427825–0.427885）低约 8e-5 eV/atom，
+超出观测范围；CPU 特征全部逐位相同。该极小的原始样本过少，无法区分是原始实现自身的范围还是步长求解方式所致。
+剩余耗时：小结构基本是 GPU 放宽本身（串行 BFGS，参考 MOF 133 步，5090 上每步约 0.09 s）与约 8 s 的 Torch/模型启动；
+gen_49320289d14b3171 的关键路径是 132 原子 linker 的 xTB 气相优化（单线程约 60–120 s，多线程更慢且改变结果）。
+
+批量（predict_batch.py，5 个 MOF 同时、单卡、每槽位独立 CPU 段；evidence/batch_*/）：
+  RTX 5090 makespan 108.9 s；同机顺序运行本包 241.4 s、原始实现 827.4 s（吞吐约 7.6x）
+  A800     makespan 158.3 s；同机顺序运行本包 376.9 s、原始实现 1074.9 s（吞吐约 6.8x）
+
+二、CPU 四特征（EPYC 9754，--skip ehull；evidence/cpu_panel_xj2/）
+5/5 与原始实现逐位相同；合计 576.2 s -> 210.7 s；gen_5b466e79428854e0 270.4 s -> 13.0 s。
+
+三、实现层面的关键改动与其等价性
+1. 超胞 MOFid 的 libopenbabel（acceleration/openbabel/，evidence/sssr_ringlist_xj2.txt）
+   • 用未改动的 ring.cpp 按原工具链（gcc 11.4）重编重链，得到与原始库逐字节相同的 .so 与目标文件；
+     加速库用同一流程构建，只替换 ring.cpp。
+   • 3 个超胞（1264/2752/3488 原子，最多 1137 个 SSSR 环、5315 个 LSSR 环）上，SSSR 与 LSSR 环列表（含顺序）
+     及芳香原子数与原始库逐项相同。EPYC 上 3488 原子超胞的 sbu 483.7 s -> 8.7 s。
+2. BFGS 步长（evidence/gpu_relaxation_matrix/）
+   • 原始模型调用自身噪声：同一构型重复调用，力相差 2.4e-6–4.8e-6 eV/Å，能量相差至多 1.1e-7 eV/atom。
+   • 真实放宽轨迹的 Hessian 在抽查的全部检查点上正定；Cholesky 步与 eigh 步的相对差 1.3e-13–2.4e-12。
+3. CUDA JIT 缓存：RTX 5090 上隔离环境隐藏 ~/.nv/ComputeCache 时，参考 MOF 每步 0.20 s，保留后 0.09 s；
+   A800 不受影响（0.108 vs 0.135 s）。只影响编译产物是否复用。
+4. 失败与中断：无效 CIF 与原始实现同为退出码 3、同一报错，已启动阶段 2 s 内取消；调度器收到 SIGTERM 后无残留进程。
+
+四、放宽终点统计（三种 GPU，不含 reference58；以偏离原始样本中位数 > 1e-4 eV/atom 记为替代极小）
+  原始实现 10/104；Cholesky（默认）1/12；nockpt_merge 4/21；二者合用 9/35（同卡同批对照 6/24 对原始 4/24）。
+  nockpt_merge 默认关闭。矩阵中 4090 上 2 次因该卡另一用户占用 17 GB 显存而 CUDA OOM，记为失败、不计入；
+  矩阵 progress.log 的 rc 字段不可靠，完成与否以 bench.json 是否存在为准。
+
+五、原始流程自身的不确定性（本包未改变）
+1. MOFid 原胞片段 SMILES 依赖内存地址（AtomSet 为按指针排序的 std::set<OBAtom*>），随工作路径长度变化。
+   gen_eed3ec90c711abe1 已出现 4 种写法，Linker HOMO -10.598/-10.359/-10.235/-9.958 eV，分数约 0.23–0.40。
+2. RMSD 的 xTB 气相优化随 CPU 指令集变化：reference58 在 EPYC 为 0.834694，在 Ryzen 为 0.832944。
+3. GPU 放宽不逐次复现，约 10% 的放宽落入替代极小（第四节）。
+
+六、安装
+完整包在 RTX 5090（WSL2 Ubuntu 26.04）全新目录安装，verify.py --gpu-id 0 PASS（evidence/openbox_5090/）；
+轻量包在三个平台以 --reuse 全新安装，并完成第一节全部运行。

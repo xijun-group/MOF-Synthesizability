@@ -1,0 +1,42 @@
+{
+  "label": "gen_5b466e79428854e0",
+  "solver": "orig",
+  "infer": "nockpt_merge",
+  "energy_eV": -3039.85645322106,
+  "energy_above_hull": 0.4987137331168485,
+  "energy_below_reference_hull": 0.0,
+  "formation_energy": -0.27726524203224706,
+  "decomposition_products": {
+    "C": 0.4449541284403684,
+    "CO2": 0.04128440366972108,
+    "H2O": 0.4128440366972499,
+    "Ni": 0.01834862385321071,
+    "ZrO2": 0.0825688073394515
+  },
+  "relax": {
+    "id": "gen_5b466e79428854e0",
+    "model": "/home/sun07ao/syn_release_review_20261011/runtime/qmof-ehull/UMA/checkpoints/uma-s-1p1.pt",
+    "fmax_target": 0.03,
+    "max_steps": 10000,
+    "fix_cell": false,
+    "converged": true,
+    "nsteps": 165,
+    "final_energy": -3039.85645322106,
+    "final_volume": 9987.297808710578,
+    "final_fmax": 0.029390204697847366
+  },
+  "natoms": 436,
+  "energy_per_atom": -6.972147828488669,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "torch": "2.8.0+cu128",
+  "solver_stats": {
+    "chol": 0,
+    "eigh_fallback": 0
+  },
+  "wall": {
+    "import_s": 4.392808314994909,
+    "relax_s": 90.89503302308731,
+    "hull_s": 5.44062375894282,
+    "total_s": 106.27900698804297
+  }
+}

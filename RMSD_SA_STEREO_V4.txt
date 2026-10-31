@@ -1,0 +1,21 @@
+RMSD / DeltaE selection revision v4, 2026-10-25
+Protocol: rmsd-deltae-sa-stereo-compatible-v4-20261025
+1. Prefer exact standardized-parent SMILES equality with the complete-set SA maximum.
+2. Only if no exact match: for a wholly stereo-unspecified target, compare parents
+   after removing stereochemistry ONLY. Preserve isotope labels, atom/bond graph,
+   bond orders, formal charge, H count and tautomer; no chemical-state edits.
+   Targets with ANY specified stereo, including partial specification, do not use
+   this tier. Correspondence does not prove the same absolute stereoisomer.
+3. If neither matches, use original Open Babel StripSalts (-r), including native ties.
+Within either matching tier, choose most explicit atoms, then first component.
+Keep target/selected parent strings and original explicit atoms/coordinates intact.
+Receipts distinguish exact_sa_parent / stereo_compatible_sa_parent /
+largest_fragment_fallback. selected_matches_sa_parent and n_matching_components
+retain their exact-match meaning; selected_corresponds_sa_parent includes exact
+or compatible correspondence. stereo_compatibility_used and
+n_stereo_compatible_components report the second tier explicitly.
+New protocol rejects all old protocol caches; use fresh work directories.
+Complete finite SA set still required. SA/HOMO/Ehull and xTB settings unchanged.
+No batch restart or historical feature replacement. This revision is included
+in the updated ZIP; see REPACK_20261025.txt.
+Supersedes selection rules in RMSD_SA_FALLBACK_V3.txt and RMSD_SA_MAX_V2.txt.

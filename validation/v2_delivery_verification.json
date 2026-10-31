@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "checks": {
+    "v1_zip_hash_unchanged": true,
+    "v1_working_copy_manifest_entries_unchanged": true,
+    "original_accelerator_zip_hash_unchanged": true,
+    "baseline_unchanged": true,
+    "standardizer_and_homo_code_unchanged_since_v1": true,
+    "incremental_v1_dry_run": true,
+    "incremental_v1_apply": true,
+    "incremental_v1_applied_files_match": true,
+    "cumulative_pristine_3p1_dry_run": true,
+    "cumulative_pristine_3p1_apply": true,
+    "cumulative_pristine_3p1_applied_files_match": true,
+    "real_geometry_qm_19_checks_pass": true,
+    "independent_sa_max_selection": true,
+    "selected_not_largest": true,
+    "serial_energy_extraction_matches_raw_logs": true,
+    "serial_deltae_matches_raw_logs": true,
+    "serial_successful_original_decomposition_used": true,
+    "parallel_energy_extraction_matches_raw_logs": true,
+    "parallel_deltae_matches_raw_logs": true,
+    "parallel_successful_original_decomposition_used": true,
+    "rmsd_sa_target_tests.log_pass": true,
+    "linkerfix_v2_regression.log_pass": true,
+    "all_modified_python_compiles": true
+  },
+  "passed": 23,
+  "total": 23,
+  "patch_checks": {
+    "incremental_v1": {
+      "dry_run": {
+        "returncode": 0,
+        "stdout": "checking file predict/predict_synthesizability.py\nchecking file predict/stage_scheduler.py\nchecking file predict/rules/rmsd_sa_target.py\nchecking file verify.py\nchecking file README.txt\nchecking file VERSION\nchecking file RMSD_SA_MAX_V2.txt\n",
+        "stderr": ""
+      },
+      "apply": {
+        "returncode": 0,
+        "stdout": "patching file predict/predict_synthesizability.py\npatching file predict/stage_scheduler.py\npatching file predict/rules/rmsd_sa_target.py\npatching file verify.py\npatching file README.txt\npatching file VERSION\npatching file RMSD_SA_MAX_V2.txt\n",
+        "stderr": ""
+      }
+    },
+    "cumulative_pristine_3p1": {
+      "dry_run": {
+        "returncode": 0,
+        "stdout": "checking file predict/predict_synthesizability.py\nchecking file predict/stage_scheduler.py\nchecking file predict/rules/rmsd_sa_target.py\nchecking file predict/rules/standardize_linker_smiles.py\nchecking file predict/rules/canonical_linker_qm.py\nchecking file verify.py\nchecking file README.txt\nchecking file VERSION\nchecking file RMSD_SA_MAX_V2.txt\n",
+        "stderr": ""
+      },
+      "apply": {
+        "returncode": 0,
+        "stdout": "patching file predict/predict_synthesizability.py\npatching file predict/stage_scheduler.py\npatching file predict/rules/rmsd_sa_target.py\npatching file predict/rules/standardize_linker_smiles.py\npatching file predict/rules/canonical_linker_qm.py\npatching file verify.py\npatching file README.txt\npatching file VERSION\npatching file RMSD_SA_MAX_V2.txt\n",
+        "stderr": ""
+      }
+    }
+  },
+  "v1_archive_entries_checked": 463,
+  "source_files_sha256": {
+    "predict/predict_synthesizability.py": "d93c94f499250d40031a2f701dc4c1cd9a0b1076400efdd4c92bb0cd8ad9ec4c",
+    "predict/stage_scheduler.py": "0c78661d46de636d60273c624374f920125ccee4fdd1a191aa4e059c818f60e8",
+    "predict/rules/rmsd_sa_target.py": "afbcf364472741b1536c8abb3daa9c260ca63b5fab835dff833ba966fa1bada9",
+    "predict/rules/standardize_linker_smiles.py": "1a9f41978aeb0520cd18c193dc2b53f2907a22be4cc1ee89b26d4c9bd6fa3b78",
+    "predict/rules/canonical_linker_qm.py": "dc17a81fc8f7b3f3f9672016caee33b60a2fb7b051ae503f6a9d71dcc7044913",
+    "verify.py": "0dc89273b31129706301dde85c1d83c904ee946e7c0e199a44f7825d9dd8664c",
+    "README.txt": "4ee1e763b0787d0a19e071ef51b49ca7eb68cabb23e7a088604ed4a89cff9136",
+    "VERSION": "a7de4a30324726a90500b03a96c2df067ddfe3f55b6bdc9a0b6bb6674bfdb7fe",
+    "RMSD_SA_MAX_V2.txt": "f14d47dd98689ddbb7252f94864e1474183af991eb416c9d123c08e92a3633f4"
+  },
+  "scope": "source/artifact verification; no new calculation"
+}

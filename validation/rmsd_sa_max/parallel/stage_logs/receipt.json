@@ -1,0 +1,15 @@
+{
+  "state": "complete",
+  "stage_jobs": 2,
+  "wall_s": 3.478449012967758,
+  "stages": {
+    "rmsd": {
+      "state": "complete",
+      "stage": "rmsd",
+      "wall_s": 3.036148754064925,
+      "returncode": 0,
+      "process_wall_s": 3.476224987069145,
+      "log": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/stage_logs/rmsd.log"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+[predict] MOFid: reusing /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid/Output
+[predict] RMSD: 2x supercell, 142 -> 1136 sites
+[predict] MOFid fragments (no topology): supercell2.cif -> /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output/MetalOxo
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output/SingleNode
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output/AllNode
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output/StandardIsolated
+double free or corruption (!prev)
+[predict] Accelerated MOFid extraction failed; retrying original SBU in a fresh output tree
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output_original/MetalOxo
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output_original/SingleNode
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output_original/AllNode
+Created a new output directory: /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output_original/StandardIsolated
+[predict] obabel -xc: /share/data/cheyue/data/SYN-final/release/mofsynth-fast-3.1/runtime/mofsynth-env/bin/obabel /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/rmsd/linker.xyz -xc -O /share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/rmsd/linker.smi
+[predict] RMSD: 0.0234766497 A (plain, 3 methods, 24 atoms)
+[predict] RMSD: reusing verified SA-max target rmsd.json
+[predict] ERROR: RMSD cache uses a different target/protocol/input; use a fresh --work directory
+{
+  "status": "PASS",
+  "checks": {
+    "three_complete_distinct_parents": true,
+    "one_cell_matches_or_explicitly_stops": true,
+    "missing_target_stops_without_xyz": true,
+    "default_two_cell_exact_target_match": true,
+    "selected_is_smaller_than_largest_component": true,
+    "same_explicit_atoms_no_addition": true,
+    "original_coordinates_preserved_to_xyz_precision": true,
+    "target_is_sa_max": true,
+    "deltae_is_same_fragment_opt_minus_initial_sp": true,
+    "deltae_kcal_conversion": true,
+    "rmsd_is_minimum_alignment_result": true,
+    "scheduler_receives_fragment_identities": true,
+    "serial_parallel_same_target": true,
+    "serial_parallel_same_initial_xyz": true,
+    "serial_parallel_same_optimized_xyz": true,
+    "serial_parallel_same_rmsd_and_deltae": true,
+    "same_protocol_cache_valid": true,
+    "changed_target_cache_rejected": true,
+    "fixture_inputs_unchanged": true
+  },
+  "structure_id": "DB1-Cu2O8N2-irmof14_A-irmof6_A_No1",
+  "selection": {
+    "protocol": "rmsd-deltae-sa-max-parent-v2-20261024",
+    "target_parent": "c1cc2cncc3ccc4cncc1c4c23",
+    "target_sa": 2.2235212228095467,
+    "sa_tied_parents": [
+      "c1cc2cncc3ccc4cncc1c4c23"
+    ],
+    "sa_tie_rule": "exact maximum; lexicographic canonical SMILES",
+    "geometry_copy_rule": "most explicit atoms among exact-parent matches; first component on tie",
+    "standardizer": {
+      "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+      "rdkit_version": "2026.03.6",
+      "tautomer_max_tautomers": 1000,
+      "tautomer_max_transforms": 1000,
+      "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+      "remaining_radicals": "legacy one-H-per-radical-electron capping",
+      "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+    }
+  },
+  "sa_scores": {
+    "per_fragment": {
+      "O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34": 2.0336048229447385,
+      "O=C(O)c1ccc(C(=O)O)c2c1CC2": 2.175999614032218,
+      "c1cc2cncc3ccc4cncc1c4c23": 2.2235212228095467
+    },
+    "sascore": 2.2235212228095467,
+    "n_scored": 3,
+    "complete": true
+  },
+  "selected_natoms": 24,
+  "largest_component_natoms": 30,
+  "coordinate_serialization_max_error_A": 4.98594587838852e-06,
+  "serial_result": {
+    "rmsd_a": 0.0234766497387001,
+    "rmsd_method": "plain",
+    "rmsd_n_methods": 3,
+    "all_method_values": {
+      "plain": 0.0234766497387001,
+      "hungarian": 0.0234766497387001,
+      "distance": 3.96316413244211
+    },
+    "natoms": 24,
+    "smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+    "sp0_energy_hartree": -39.915685244015,
+    "opt_energy_hartree": -39.91919860019,
+    "sp1_energy_hartree": -39.919198599492,
+    "delta_energy_hartree": -0.0035133561749987052,
+    "delta_energy_kcal_mol": -2.2046661333734376,
+    "target_selection": {
+      "protocol": "rmsd-deltae-sa-max-parent-v2-20261024",
+      "target_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "target_sa": 2.2235212228095467,
+      "sa_tied_parents": [
+        "c1cc2cncc3ccc4cncc1c4c23"
+      ],
+      "sa_tie_rule": "exact maximum; lexicographic canonical SMILES",
+      "geometry_copy_rule": "most explicit atoms among exact-parent matches; first component on tie",
+      "standardizer": {
+        "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+        "rdkit_version": "2026.03.6",
+        "tautomer_max_tautomers": 1000,
+        "tautomer_max_transforms": 1000,
+        "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+        "remaining_radicals": "legacy one-H-per-radical-electron capping",
+        "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+      }
+    },
+    "input_cif_sha256": "7e47bf7361f3431b7f9b104940e44fd79dc11de1ed790a1a7f50d6952d344ff0",
+    "supercell": 2,
+    "selected_xyz_sha256": "a2c006542f45bfc3f38418a79575ff8f3cf9ed6832172e0cb4bc42ad5634a116",
+    "geometry_selection": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/rmsd/geometry_selection.json",
+    "selected_geometry_component": {
+      "component_index": 0,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    "method_tag": "GFN2-default-charge-spin",
+    "decomposition": "2x supercell (the upstream MOFSynth rule)",
+    "linkers_cif": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/serial/mofid_supercell2/mofid/Output_original/MetalOxo/linkers.cif",
+    "linkers_cif_sha256": "73cc8a34d0d4ce9cdb9b3165f5ce050853ccd0094b66bb53ce5b7966890666c7"
+  },
+  "parallel_result": {
+    "rmsd_a": 0.0234766497387001,
+    "rmsd_method": "plain",
+    "rmsd_n_methods": 3,
+    "all_method_values": {
+      "plain": 0.0234766497387001,
+      "hungarian": 0.0234766497387001,
+      "distance": 3.96316413244211
+    },
+    "natoms": 24,
+    "smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+    "sp0_energy_hartree": -39.915685244015,
+    "opt_energy_hartree": -39.91919860019,
+    "sp1_energy_hartree": -39.919198599492,
+    "delta_energy_hartree": -0.0035133561749987052,
+    "delta_energy_kcal_mol": -2.2046661333734376,
+    "target_selection": {
+      "protocol": "rmsd-deltae-sa-max-parent-v2-20261024",
+      "target_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "target_sa": 2.2235212228095467,
+      "sa_tied_parents": [
+        "c1cc2cncc3ccc4cncc1c4c23"
+      ],
+      "sa_tie_rule": "exact maximum; lexicographic canonical SMILES",
+      "geometry_copy_rule": "most explicit atoms among exact-parent matches; first component on tie",
+      "standardizer": {
+        "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+        "rdkit_version": "2026.03.6",
+        "tautomer_max_tautomers": 1000,
+        "tautomer_max_transforms": 1000,
+        "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+        "remaining_radicals": "legacy one-H-per-radical-electron capping",
+        "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+      }
+    },
+    "input_cif_sha256": "7e47bf7361f3431b7f9b104940e44fd79dc11de1ed790a1a7f50d6952d344ff0",
+    "supercell": 2,
+    "selected_xyz_sha256": "a2c006542f45bfc3f38418a79575ff8f3cf9ed6832172e0cb4bc42ad5634a116",
+    "geometry_selection": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/rmsd/geometry_selection.json",
+    "selected_geometry_component": {
+      "component_index": 0,
+      "natoms": 24,
+      "raw_geometry_smiles": "n1cc2ccc3c4c2c(c1)ccc4cnc3",
+      "raw_geometry_formula": "C14H8N2",
+      "raw_geometry_formal_charge": 0,
+      "standardized_parent": "c1cc2cncc3ccc4cncc1c4c23",
+      "status": "ok",
+      "reason": "",
+      "repairs_for_identity_only": []
+    },
+    "method_tag": "GFN2-default-charge-spin",
+    "decomposition": "2x supercell (the upstream MOFSynth rule)",
+    "linkers_cif": "/share/data/cheyue/data/mofsynth-cheyue-share-20261024-n7dvmtfg/linker-rmsd-samax-v2/mofsynth-fast/validation/rmsd_sa_max/parallel/mofid_supercell2/mofid/Output_original/MetalOxo/linkers.cif",
+    "linkers_cif_sha256": "73cc8a34d0d4ce9cdb9b3165f5ce050853ccd0094b66bb53ce5b7966890666c7"
+  },
+  "fixture_sha256": {
+    "input.cif": "7e47bf7361f3431b7f9b104940e44fd79dc11de1ed790a1a7f50d6952d344ff0",
+    "linker_stats.txt": "16197876bc16e4e90122ee684d95d05119477e0e2e50c7e929728a5c001f4b14",
+    "linkers.cif": "daaa6787394eb4bde913919156d995fe16253aefa3f87467e1cda6c63d007541"
+  },
+  "xtb_sha256": "271dd6cdd5da127a8e39919e7e32d924790fb346f0057b4183769ba8b3411887",
+  "new_geometry_optimizations": 2,
+  "new_homo_campaigns": 0,
+  "model_fits_or_scores": 0,
+  "new_ehull": 0
+}

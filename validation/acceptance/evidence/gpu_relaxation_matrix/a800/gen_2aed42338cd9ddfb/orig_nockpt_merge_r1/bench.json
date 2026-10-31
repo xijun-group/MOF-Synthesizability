@@ -1,0 +1,41 @@
+{
+  "label": "gen_2aed42338cd9ddfb",
+  "solver": "orig",
+  "infer": "nockpt_merge",
+  "energy_eV": -2477.9530689326984,
+  "energy_above_hull": 0.2309569280117545,
+  "energy_below_reference_hull": 0.0,
+  "formation_energy": -0.12713969531816594,
+  "decomposition_products": {
+    "H2O": 0.2950819672131155,
+    "H4C": 0.19808743169398912,
+    "C": 0.48497267759562823,
+    "Cd": 0.02185792349726776
+  },
+  "relax": {
+    "id": "gen_2aed42338cd9ddfb",
+    "model": "/home/sun07ao/syn_perf_20261023/v3/local/mofsynth-fast/runtime/qmof-ehull/UMA/checkpoints/uma-s-1p1.pt",
+    "fmax_target": 0.03,
+    "max_steps": 10000,
+    "fix_cell": false,
+    "converged": true,
+    "nsteps": 460,
+    "final_energy": -2477.9530689326984,
+    "final_volume": 49566.141769383124,
+    "final_fmax": 0.02815021574497223
+  },
+  "natoms": 366,
+  "energy_per_atom": -6.770363576318848,
+  "gpu": "NVIDIA A800 80GB PCIe",
+  "torch": "2.8.0+cu128",
+  "solver_stats": {
+    "chol": 0,
+    "eigh_fallback": 0
+  },
+  "wall": {
+    "import_s": 4.538569683674723,
+    "relax_s": 167.33369417814538,
+    "hull_s": 5.435960943810642,
+    "total_s": 182.6091903396882
+  }
+}

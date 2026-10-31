@@ -1,0 +1,84 @@
+{
+  "state": "PASS",
+  "seed": 20261024,
+  "scope": "stratified sample, not a full population reprocessing",
+  "catalogue_rows": 76779,
+  "counts": {
+    "sampled": 1647,
+    "ok": 1482,
+    "changed": 727,
+    "rescued": 409,
+    "previously_valued_now_rejected": 85,
+    "idempotent_checked": 1482,
+    "atom_reorder_checked": 1482,
+    "failed": 165
+  },
+  "failure_reasons": {
+    "Explicit valence for atom # 15 N, 4, is greater than permitted": 4,
+    "unsupported_azole_radical_pattern": 18,
+    "incomplete_tautomer_enumeration": 85,
+    "Explicit valence for atom # 1 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 3 N, 4, is greater than permitted": 2,
+    "Explicit valence for atom # 4 N, 4, is greater than permitted": 5,
+    "Explicit valence for atom # 7 N, 4, is greater than permitted": 5,
+    "disconnected_fragment_requires_explicit_membership": 12,
+    "Explicit valence for atom # 6 N, 4, is greater than permitted": 4,
+    "Explicit valence for atom # 11 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 16 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 25 N, 4, is greater than permitted": 3,
+    "Explicit valence for atom # 13 N, 4, is greater than permitted": 3,
+    "Explicit valence for atom # 10 N, 4, is greater than permitted": 2,
+    "Explicit valence for atom # 14 N, 4, is greater than permitted": 1,
+    "unsupported_element_or_attachment_dummy": 5,
+    "Explicit valence for atom # 0 N, 4, is greater than permitted": 4,
+    "Explicit valence for atom # 17 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 8 N, 4, is greater than permitted": 2,
+    "Explicit valence for atom # 22 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 5 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 21 N, 4, is greater than permitted": 2,
+    "Explicit valence for atom # 36 N, 4, is greater than permitted": 1,
+    "Explicit valence for atom # 12 N, 4, is greater than permitted": 1
+  },
+  "repair_counts": {
+    "azole_surplus_pyridine_N_charge": 874,
+    "H_cap_remaining_radical_centres:2": 114,
+    "H_cap_remaining_radical_centres:1": 41,
+    "azole_ring_radical_to_delocalised_azolate": 90,
+    "H_cap_remaining_radical_centres:10": 6,
+    "carboxyl_multiradical_to_carboxylate": 128,
+    "H_cap_remaining_radical_centres:4": 105,
+    "H_cap_remaining_radical_centres:8": 60,
+    "H_cap_remaining_radical_centres:3": 19,
+    "H_cap_remaining_radical_centres:6": 33,
+    "H_cap_remaining_radical_centres:12": 10,
+    "H_cap_remaining_radical_centres:24": 1,
+    "H_cap_remaining_radical_centres:16": 1,
+    "H_cap_remaining_radical_centres:18": 1,
+    "H_cap_remaining_radical_centres:5": 4,
+    "H_cap_remaining_radical_centres:41": 1,
+    "H_cap_remaining_radical_centres:14": 4,
+    "H_cap_remaining_radical_centres:20": 1,
+    "H_cap_remaining_radical_centres:32": 1,
+    "H_cap_remaining_radical_centres:26": 1
+  },
+  "violations": [],
+  "standardizer": {
+    "version": "mofid-neutral-parent-v2-azole-tautomer-20261024",
+    "rdkit_version": "2026.03.6",
+    "tautomer_max_tautomers": 1000,
+    "tautomer_max_transforms": 1000,
+    "tautomer_selection": "RDKit default score, canonical SMILES tie-break",
+    "remaining_radicals": "legacy one-H-per-radical-electron capping",
+    "stereochemistry": "retain unless changed by RDKit tautomer enumeration"
+  },
+  "inputs": [
+    {
+      "path": "/share/data/cheyue/data/SYN-final/SBU-linker-toplogy/linker-standardization/fragment_provenance_summary.csv",
+      "sha256": "4645e4c749b2152c98f64bb1103a641b82ea9bc9469fa2b2c9bb38887e8530e7"
+    },
+    {
+      "path": "/share/data/cheyue/data/SYN-final/SBU-linker-toplogy/linker-standardization/rescue_unparsable_fragments.csv",
+      "sha256": "1b3b2549ae622d1d46f6b7deb6d9a2d61eb15c3db3e95272d131d03b1d60a4c9"
+    }
+  ]
+}

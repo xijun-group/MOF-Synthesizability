@@ -1,0 +1,149 @@
+{
+  "mode": "cif-pipeline",
+  "provenance": {
+    "cif": "/home/sun07ao/syn_perf_20261023/v3/inputs/reference58.cif",
+    "cif_sha256": "18b3edea6ecc338ece8100706299b65376b228cd82f432087553b1e89f4f5a0a",
+    "label": "reference58",
+    "started": "2026-10-24T08:55:08",
+    "prefix": "/home/sun07ao/syn_perf_20261023/v3/openbox_a800/mofsynth-fast/runtime"
+  },
+  "features": {
+    "solvent_removal_stability": 0.790681004524231,
+    "RMSD_[A]": 0.8346938043977259,
+    "Linker_HOMO_[eV]": -9.488,
+    "sascore": 2.789216370593662,
+    "Ehull": 0.22743875284833592
+  },
+  "feature_order": [
+    "solvent_removal_stability",
+    "RMSD_[A]",
+    "Linker_HOMO_[eV]",
+    "sascore",
+    "Ehull"
+  ],
+  "feature_labels": [
+    "solvent_removal_stability",
+    "RMSD_[A]",
+    "Linker_HOMO_[eV] [OrganicFragment_HOMO_mofid_neutral_max_complete_[eV]]",
+    "sascore",
+    "Ehull"
+  ],
+  "missing_features": [],
+  "scored": true,
+  "logit": -0.9976346492767334,
+  "native_score": 0.2694067316396953,
+  "imputed": [
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "model": {
+    "model": "vpu_mlp_relu_h1_128",
+    "features": [
+      "solvent_removal_stability",
+      "RMSD_[A]",
+      "Linker_HOMO_[eV]",
+      "sascore",
+      "Ehull"
+    ],
+    "channel": "OrganicFragment_HOMO_mofid_neutral_max_complete_[eV]",
+    "seed": 2026082302,
+    "training_scope": "T1 folds 1-9 on the objectABC_v1 layer: 83,960 rows, P 8,137 / U 75,823, DB1_Lan U 14,299 retained",
+    "parameter_count": 897,
+    "model_pt_sha256": "a5109e174b3e57eb7c54a5f2a6ed65d393ce7459637a0a95d7d413d7a7f541ae",
+    "score_semantics": "uncalibrated operational score (sigmoid of the network logit); not a probability of synthesis, not a calibrated performance metric"
+  },
+  "details": {
+    "mofid": {
+      "output_dir": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofid/Output",
+      "linker_stats": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofid/Output/MetalOxo/linker_stats.txt",
+      "linkers_cif": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofid/Output/MetalOxo/linkers.cif",
+      "reused": false
+    },
+    "fragment_set": {
+      "canonical_set": [
+        "Nc1c(N=Nc2cc(C(=O)[O-])cc(C(=O)[O-])c2N)cc(C(=O)[O-])cc1C(=O)[O-]",
+        "Nc1cc2cnc(N)cc2cn1"
+      ],
+      "standardised_set": [
+        "Nc1c(N=Nc2cc(C(=O)O)cc(C(=O)O)c2N)cc(C(=O)O)cc1C(=O)O",
+        "Nc1cc2cnc(N)cc2cn1"
+      ],
+      "n_fragments": 2,
+      "n_standardised": 2,
+      "unstandardisable": [],
+      "linker_parse_status": "ok"
+    },
+    "sascore": {
+      "per_fragment": {
+        "Nc1c(N=Nc2cc(C(=O)O)cc(C(=O)O)c2N)cc(C(=O)O)cc1C(=O)O": 2.789216370593662,
+        "Nc1cc2cnc(N)cc2cn1": 2.629129796701955
+      },
+      "sascore": 2.789216370593662,
+      "n_scored": 2
+    },
+    "channel_b": {
+      "per_fragment": {
+        "Nc1c(N=Nc2cc(C(=O)O)cc(C(=O)O)c2N)cc(C(=O)O)cc1C(=O)O": -9.7012,
+        "Nc1cc2cnc(N)cc2cn1": -9.488
+      },
+      "complete": true,
+      "B": -9.488,
+      "n_identities": 2,
+      "n_converged": 2,
+      "reason": "",
+      "xtb_sha256": "271dd6cdd5da127a8e39919e7e32d924790fb346f0057b4183769ba8b3411887"
+    },
+    "rmsd": {
+      "rmsd_a": 0.8346938043977259,
+      "rmsd_method": "plain",
+      "rmsd_n_methods": 3,
+      "all_method_values": {
+        "plain": 0.8346938043977259,
+        "hungarian": 0.8346938043977259,
+        "distance": 5.969592485717862
+      },
+      "natoms": 36,
+      "smiles": "[O]C(=O)c1cc(/N=N/c2cc(cc(c2N)C(=O)[O])C(=O)[O])c(c(c1)C(=O)[O])N",
+      "sp0_energy_hartree": -82.192221215638,
+      "opt_energy_hartree": -82.392084902653,
+      "sp1_energy_hartree": -82.392084897691,
+      "delta_energy_hartree": -0.19986368701499657,
+      "method_tag": "GFN2-default-charge-spin",
+      "decomposition": "2x supercell (the upstream MOFSynth rule)",
+      "linkers_cif": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofid_supercell2/mofid/Output/MetalOxo/linkers.cif",
+      "linkers_cif_sha256": "204626129f71144f25f8704cb951b4505f6fb384aaea315223b9f0224ba2b8b7"
+    },
+    "mofsimplify": {
+      "solvent_removal_stability": 0.790681004524231,
+      "solvent_flag": 0.790681004524231,
+      "solvent_in_train": "False",
+      "thermal_T_C": "352.3525085449219",
+      "water_proba": "0.62",
+      "acid_proba": "0.2",
+      "descriptor_csv": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofsimplify/desc/reference58_descriptors.csv",
+      "predictions_csv": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/mofsimplify/predictions.csv",
+      "semantics": "MOFSimplify's solvent-removal ANN output on its own training data: an uncalibrated operational prediction, not a measured stability"
+    },
+    "ehull": {
+      "Ehull": 0.22743875284833592,
+      "json": "/home/sun07ao/syn_perf_20261023/v3/bench_cur_a800/reference58/orig/work/qmof-ehull/ehull/reference58_uma-s-1p1_ehull.json",
+      "energy_eV": -404.08790135479677,
+      "formation_energy": -0.25202111939304733,
+      "decomposition_products": {
+        "C": 0.3620689655172413,
+        "H6C(NO)2": 0.44252873563218387,
+        "N2": 0.045977011494252866,
+        "ZnH3CNO3": 0.1034482758620694,
+        "ZnO": 0.04597701149425326
+      },
+      "relaxation_converged": null,
+      "model": "/home/sun07ao/syn_perf_20261023/v3/openbox_a800/mofsynth-fast/runtime/qmof-ehull/UMA/checkpoints/uma-s-1p1.pt",
+      "semantics": "an MLIP total energy measured against a fixed QMOF DFT reference hull: an uncalibrated operational feature value, not a measured stability and not a synthesis probability"
+    }
+  },
+  "elapsed_s": 72.1,
+  "semantics": "descriptor computation + an uncalibrated operational score; no retraining, rescaling or calibration is performed here"
+}

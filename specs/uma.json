@@ -1,0 +1,10 @@
+{
+  "repo_id": "facebook/UMA",
+  "filename": "checkpoints/uma-s-1p1.pt",
+  "revision": "c5107e43d5e811dd7cb56f57533dc0eb550dee6b",
+  "sha256": "07068e9c76702ca173d13155095f2117c1b327ec228557e64cd2709c777b824a",
+  "bytes": 1173759575,
+  "access_url": "https://huggingface.co/facebook/UMA",
+  "license_url": "https://huggingface.co/facebook/UMA/blob/main/LICENSE",
+  "distributed": false
+}

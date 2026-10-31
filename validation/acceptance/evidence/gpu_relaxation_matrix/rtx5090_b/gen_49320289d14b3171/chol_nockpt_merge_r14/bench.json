@@ -1,0 +1,41 @@
+{
+  "label": "gen_49320289d14b3171",
+  "solver": "chol",
+  "infer": "nockpt_merge",
+  "energy_eV": -1077.5120189369786,
+  "energy_above_hull": 0.2581807647660046,
+  "energy_below_reference_hull": 0.0,
+  "formation_energy": -0.16630120675302903,
+  "decomposition_products": {
+    "H5NO": 0.3544303797468353,
+    "H3N": 0.1518987341772173,
+    "C": 0.4430379746835448,
+    "YHO2": 0.05063291139240922
+  },
+  "relax": {
+    "id": "gen_49320289d14b3171",
+    "model": "/home/sun07ao/syn_perf_20261023/v3/local/mofsynth-fast/runtime/qmof-ehull/UMA/checkpoints/uma-s-1p1.pt",
+    "fmax_target": 0.03,
+    "max_steps": 10000,
+    "fix_cell": false,
+    "converged": true,
+    "nsteps": 490,
+    "final_energy": -1077.5120189369786,
+    "final_volume": 9403.023660440092,
+    "final_fmax": 0.029637116938829422
+  },
+  "natoms": 158,
+  "energy_per_atom": -6.819696322385941,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "torch": "2.8.0+cu128",
+  "solver_stats": {
+    "chol": 490,
+    "eigh_fallback": 0
+  },
+  "wall": {
+    "import_s": 3.109782045998145,
+    "relax_s": 38.0094265420048,
+    "hull_s": 3.920882892998634,
+    "total_s": 48.53690976698999
+  }
+}

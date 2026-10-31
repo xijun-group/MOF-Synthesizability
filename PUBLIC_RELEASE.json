@@ -1,0 +1,8 @@
+{
+  "source_archive": "mofsynth-fast-3.1.1.zip",
+  "source_sha256": "25faee8e339706627cba88530d3a827d408c80c1b28416558f5ecd10335f9fea",
+  "scientific_files_byte_identical": 26,
+  "uma_distributed": false,
+  "runtime_mode": "reuse",
+  "gpu_inference": "not executed"
+}

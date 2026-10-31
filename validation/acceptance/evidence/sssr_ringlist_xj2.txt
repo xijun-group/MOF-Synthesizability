@@ -1,0 +1,3 @@
+4932 identical atoms 1264 bonds 1416 sssr 153 lssr 250 sha256=d991d13acf60339b
+eed3 identical atoms 2752 bonds 3296 sssr 545 lssr 512 sha256=9841c7d626980985
+5b46 identical atoms 3488 bonds 4624 sssr 1137 lssr 5315 sha256=f787d2ceb7cef43f

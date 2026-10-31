@@ -1,0 +1,188 @@
+MOFSynth Fast: RMSD and DeltaE on the SA-max fragment
+Version: 3.1.0-linkerfix-v2-samax
+Date: 2026-10-24
+Status: implemented; regression and scoped real-geometry/QM verification passed
+
+REQUEST AND RESULT
+
+The default corrected predict/ pipeline now selects the parent with the highest
+SA score and computes RMSD and DeltaE on an existing framework geometry that
+matches that parent. It no longer selects a linker by overall fragment size.
+Both RMSD and DeltaE use the same selected XYZ and its xTB optimization.
+
+This revision includes linkerfix-v1's neutral-parent corrections unchanged.
+The old v1 ZIP/source, installed pipelines, baseline/, data matrices, historical
+scores and model weights were not modified. This is a separate lightweight
+source package that can reuse the existing runtime.
+
+PRECISE SELECTION RULE
+
+1. Read raw unit-cell MOFid linker_stats.txt column 6. Apply the existing v1
+   standardizer and require a complete eligible fragment set. Disconnected
+   records remain rejected; this revision does not strip O. components.
+2. Deduplicate standardized parent identities. Calculate SA for every identity
+   and require finite complete results. Select the maximum. On an exact numeric
+   tie, choose the lexicographically smallest canonical parent SMILES; retain
+   all tied parents and the rule in the output.
+3. Retain the existing default 2x2x2 supercell decomposition for geometry. Read
+   its linkers.cif with Open Babel and enumerate connected components. Apply
+   the same standardizer to each component's perceived SMILES for identity
+   matching. Only exact canonical-parent matches to the chosen SA target can
+   supply the geometry; no stereo-insensitive or largest-fragment fallback.
+4. If multiple geometry copies match the same parent, prefer the copy with the
+   largest number of explicit atoms, then the first component on a tie. This
+   copy rule prefers more atom-complete copies, but is not a physical optimum
+   or an average over the copies. The parent was already chosen exclusively
+   by SA; a larger different parent can never displace it.
+5. Write the selected component's original coordinates and explicit atom list
+   to rmsd/linker.xyz. No ETKDG embedding, H addition, neutralization of the
+   actual geometry or replacement of its coordinates is performed. Parent
+   normalization is for identity matching only. Preserve the original xTB
+   default charge/spin convention and gas-phase optimization.
+6. RMSD compares this initial geometry with its optimized geometry, taking the
+   smallest finite numeric result among the existing alignment-method labels.
+   DeltaE = final optimization total energy - initial-geometry SP energy.
+   Outputs include Hartree and kcal/mol (627.51 kcal/mol per Hartree).
+
+SA-max identity and the raw geometry's chemical state are distinct audit fields.
+This change does not certify protonation, physical tautomer populations or every
+MOFid extraction as chemically correct. Matching a parent is not a new global
+proof of geometric equivalence. Partial boundary components that do not match
+are recorded and cannot replace the selected target.
+
+If the target has no exact matching geometry, fail explicitly. Even if another
+parent has usable geometry, do not switch to it. --rmsd-supercell 1 now also
+reads the decomposed linker CIF, rather than the full MOF CIF.
+
+SA and channel-B HOMO continue to be independent complete-set maxima. Channel B
+does not change to HOMO-at-SAmax. DeltaE remains diagnostic output and is NOT
+added to the five-feature model. RMSD fills the existing RMSD_[A] model slot.
+
+IMPLEMENTATION
+
+predict/rules/rmsd_sa_target.py:
+  versioned SA selection, exact-parent geometry matching, tie/copy rules,
+  coordinate-preserving XYZ extraction and component-level audit.
+predict/predict_synthesizability.py:
+  serial SA-target handoff, RMSD/DeltaE provenance, energy completeness checks,
+  rejection of legacy/different-target RMSD caches, original-SBU retry after a
+  failed accelerated extraction, and incomplete-extraction cache protection.
+predict/stage_scheduler.py:
+  RMSD now waits for the same standardized identity set as channel B. Its worker
+  uses the same SA scorer. Ehull and MOFSimplify can still start early.
+verify.py:
+  installation smoke checks use the new target/aggregation contract rather
+  than the obsolete 3.1 largest-fragment RMSD/score constants. A complete new
+  five-feature installation verification was not run in this task.
+
+RMSD caches carry the protocol, parent, SA/ties, standardizer version, source
+CIF hash, supercell setting and selected XYZ hash. A legacy or mismatched cache
+is rejected with a request to use a fresh work directory. Failed/interrupted
+MOFid extractions leave an explicit marker and cannot silently reuse partial
+files on retry. Successful original-SBU fallback has a fragment_source.json
+receipt pointing to Output_original; failed accelerated outputs are retained
+for diagnosis and are not used for descriptors.
+
+NEW VERIFICATION
+
+A. Six target-selection regression groups PASS:
+   SA selection independent of identity length, deterministic exact ties,
+   incomplete/non-finite scores rejected, geometry copies restricted to the
+   exact parent, stale RMSD cache rejected, partial extraction cache rejected.
+
+B. Eleven inherited linkerfix regression groups PASS after the changes.
+   These include the prior 18-family / 440-shuffle standardizer coverage.
+   No repeat of the historical large fragment sample or its HOMO campaign.
+
+C. Real mixed-linker verification: 19/19 checks PASS.
+   Structure: DB1-Cu2O8N2-irmof14_A-irmof6_A_No1, from the supplied selected
+   UMA-geometry export. Existing raw unit-cell extraction is copied unchanged;
+   a fresh 142 -> 1,136-atom supercell decomposition is used for geometry.
+
+   The three canonical parents and SA scores are:
+     O=C(O)c1cc2ccc3cc(C(=O)O)cc4ccc(c1)c2c34   2.0336048229447385
+     O=C(O)c1ccc(C(=O)O)c2c1CC2                 2.175999614032218
+     c1cc2cncc3ccc4cncc1c4c23                   2.2235212228095467
+
+   The selected SA-max component has 24 explicit atoms; the largest component
+   has 30. Thus this test exercises an actual change of target, not just a
+   case where the old and new criteria choose the same component.
+   The 1x geometry lacks a complete exact target; it correctly stops. The 2x
+   geometry contains the exact target. A separately requested absent identity
+   also stops without producing an XYZ.
+
+   Serial and real scheduler executions each performed a fresh xTB
+   SP -> optimization -> SP on the selected geometry. Both give:
+     RMSD                           0.0234766497387001 A
+     initial SP energy            -39.915685244015 Hartree
+     final optimization energy    -39.919198600190 Hartree
+     final-geometry SP energy     -39.919198599492 Hartree
+     DeltaE                       -0.0035133561749987052 Hartree
+     DeltaE                       -2.2046661333734376 kcal/mol
+
+   Initial and optimized XYZ files are byte-identical between serial and
+   parallel executions, as are their reported energies/RMSD/DeltaE. The initial
+   XYZ preserves the selected component's atom list and coordinates to its
+   serialization precision (max coordinate error 4.986e-6 A).
+   Three of four RMSD labels returned numeric results: plain, hungarian and
+   distance; inertia-hungarian raised ValueError. The inherited rule takes the
+   minimum of available results; this is not a four-method-success claim.
+
+   Runtime: Python 3.13, RDKit 2026.03.6, Open Babel 3.1.0, xTB 6.7.1.
+   xTB uses one thread; no geometry-embedding seed is involved. The runtime's
+   compiled MOFid paths are isolated as in launch.py; shared /tmp is unchanged.
+
+   The accelerated SBU attempt crashed after writing partial files in this
+   environment. The final implementation retries the ORIGINAL SBU in a fresh
+   directory and checks its successful fragment response. The successful
+   original output is the sole authoritative geometry supplier in this test.
+   The accelerator C++ crash itself is not fixed or claimed universally
+   reproduced. Preliminary attempts are outside this package under the outer
+   internal-attempts/ directory. Two preliminary geometry optimizations using
+   an unchecked partial extraction are explicitly non-authoritative; only
+   the two fresh executions above constitute the successful verification.
+
+USE AND REPRODUCTION
+
+The changes are already applied in this source copy. Reuse a compatible runtime:
+  bash install.sh --reuse --prefix /absolute/path/runtime --ehull-python /absolute/path/gpu-env/bin/python
+  bash predict.sh --cif /absolute/path/mof.cif --work /absolute/path/NEW_work_dir
+
+Use a fresh work directory. --baseline explicitly runs the frozen original
+pipeline and does not use this new selection rule.
+
+Inspect prediction.json -> details.rmsd for target_selection, selected geometry,
+energies and DeltaE; rmsd/geometry_selection.json contains every candidate.
+prediction.json also records that validation of the frozen model with the
+SA-max RMSD definition has not been executed.
+
+Tests with the runtime Python:
+  python validation/test_rmsd_sa_target.py
+  python validation/test_linker_postprocess.py
+Fresh real verification, using a COPY with previous serial/parallel outputs
+removed or archived first:
+  bash validation/verify_rmsd_sa_max.sh /absolute/path/runtime
+The .sh wrapper creates the same private /tmp/mofid-build mount as launch.py.
+
+Patches:
+  rmsd-samax-v2-from-linkerfix-v1.patch applies to the delivered linkerfix-v1.
+  linker-rmsd-samax-v2.patch applies cumulatively to pristine accelerator 3.1.
+  Both are dry-run/applied and compared byte-for-byte during packaging.
+  The inherited linker-postprocess-fix.patch/report are historical v1 material.
+
+BOUNDARIES
+
+This changes the meaning of a model input. The bundled model was trained with
+the historical feature definition; training and predictive validation under
+SA-max RMSD were NOT executed. Producing an operational score with the existing
+checkpoint does not establish predictive validity for the revised input.
+No production replacement, population processing, new HOMO campaign, Ehull
+calculation, full five-feature inference, retraining, calibration or threshold
+change was executed. No original input or historical deliverable was overwritten.
+This small test demonstrates implementation and identity/coordinate consistency,
+not general chemical validity or universal MOFid coverage.
+
+Evidence: validation/rmsd_sa_max/verification.json, fixtures/, serial/, parallel/,
+one_cell_geometry/, missing_target/; validation/rmsd_sa_target_tests.log,
+validation/linkerfix_v2_regression.log, validation/rmsd_sa_max_run.log,
+validation/v2_delivery_verification.json and MANIFEST.sha256.
